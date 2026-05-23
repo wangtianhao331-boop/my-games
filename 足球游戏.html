@@ -51,7 +51,7 @@ canvas{display:block;width:100%;height:100%}
   <div id="joy"><div id="jk">⚽</div></div>
   <div id="rb">
     <div class="br"><div class="rb drb" id="bd">🏃<span class="l">带球</span></div><div class="rb psb" id="bp">⚡<span class="l">传球</span></div><div class="rb stb" id="bs">🎯<span class="l">射门</span></div></div>
-    <div class="br"><div class="rb smb" id="bsp">💨</div></div>
+    <div class="br"><div class="rb smb" id="bsp">💨</div><div class="rb smb" id="bst" style="background:rgba(255,200,50,0.25);border-color:rgba(255,200,50,0.45)">💪<span class="l">抢球</span></div></div>
   </div>
 </div>
 
@@ -106,7 +106,7 @@ var GOAL_W = 70, GOAL_D = 15;
 
 // ---- 游戏状态 ----
 var G = null;
-var ctrl = {mx:0, my:0, drib:false, sprint:false, aim:null, pwr:0};
+var ctrl = {mx:0, my:0, drib:false, sprint:false, steal:false, aim:null, pwr:0};
 
 // ---- 球员 ----
 var myTeam = [], aiTeam = [];
@@ -246,6 +246,35 @@ function update(){
   } else {
     if(ball.owner==='my' && dist(me.x,me.y,ball.x,ball.y)>25){
       ball.owner=null; me.hasBall=false;
+    }
+  }
+
+  // ---- 抢球（靠近带球对手时按抢球键）----
+  if(ctrl.steal || ctrl.sprint){
+    for(var i=0;i<aiTeam.length;i++){
+      var ai=aiTeam[i];
+      if(ai.hasBall && dist(me.x,me.y,ai.x,ai.y)<30){
+        // 抢到了！
+        ai.hasBall=false;
+        ball.owner='my';
+        me.hasBall=true;
+        ball.vx = (me.x-ai.x)*0.5;
+        ball.vy = (me.y-ai.y)*0.5;
+        beep(400,0.1);
+        break;
+      }
+    }
+  }
+  // 靠近带球对手也会自动逼抢
+  for(var i=0;i<aiTeam.length;i++){
+    var ai=aiTeam[i];
+    if(ai.hasBall && dist(me.x,me.y,ai.x,ai.y)<18){
+      // 身体对抗，球掉了
+      ai.hasBall=false;
+      ball.owner=null;
+      ball.vx = (ball.x-me.x)*0.8;
+      ball.vy = (ball.y-me.y)*0.8;
+      beep(300,0.06);
     }
   }
 
@@ -674,6 +703,8 @@ document.addEventListener('keydown',function(e){
     case ' ':e.preventDefault();ctrl.drib=true;break;
     case '1':doShoot();break;
     case '2':doPass();break;
+    case '3':ctrl.steal=true;break;
+    case 'e':case 'E':ctrl.steal=true;break;
     case 'Enter':exec();break;
     case 'Escape':ctrl.aim=null;document.getElementById('pbar').classList.remove('on');break;
   }
@@ -683,6 +714,8 @@ document.addEventListener('keyup',function(e){
     case 'w':case 'W':case 's':case 'S':ctrl.my=0;break;
     case 'a':case 'A':case 'd':case 'D':ctrl.mx=0;break;
     case ' ':ctrl.drib=false;break;
+    case '3':ctrl.steal=false;break;
+    case 'e':case 'E':ctrl.steal=false;break;
   }
 });
 
@@ -706,6 +739,10 @@ sb.addEventListener('touchcancel',function(){si=null;this.classList.remove('on')
 document.getElementById('bsp').addEventListener('touchstart',function(e){e.preventDefault();e.stopPropagation();ctrl.sprint=true;});
 document.getElementById('bsp').addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();ctrl.sprint=false;});
 document.getElementById('bsp').addEventListener('touchcancel',function(){ctrl.sprint=false;});
+
+document.getElementById('bst').addEventListener('touchstart',function(e){e.preventDefault();e.stopPropagation();ctrl.steal=true;this.style.background='rgba(255,200,50,0.5)';});
+document.getElementById('bst').addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();ctrl.steal=false;this.style.background='';});
+document.getElementById('bst').addEventListener('touchcancel',function(){ctrl.steal=false;this.style.background='';});
 
 // ==== 主循环 ====
 function loop(){
