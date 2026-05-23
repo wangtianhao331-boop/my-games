@@ -421,4 +421,113 @@ function showDead(){hideAll();$('hud').style.display='none';$('sDead').className
 // ---- 主循环 ----
 function lp(){try{update();render()}catch(e){try{cx.fillStyle='#fff';cx.font='14px Arial';cx.fillText('ERR:'+e.message,20,40)}catch(e2){}}requestAnimationFrame(lp)}
 requestAnimationFrame(lp)
-</script></body></html>
+</script>
+<!-- ===== 虚拟按键（触屏设备专用）===== -->
+<style>
+#vk{position:fixed;inset:0;z-index:50;pointer-events:none;touch-action:none;display:none}
+#vk.on{display:block}
+.vk-btn{position:absolute;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-tap-highlight-color:transparent;touch-action:none;color:#fff;font-weight:bold}
+.vk-dpad-btn{width:48px;height:48px;border-radius:10px;background:rgba(255,255,255,0.12);border:2px solid rgba(255,255,255,0.2);font-size:20px}
+.vk-dpad-btn:active,.vk-dpad-btn.pressed{background:rgba(255,255,255,0.35)}
+.vk-act-btn{border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.vk-sml{border-radius:10px}
+#vkLook{position:absolute;right:0;top:0;width:45%;height:100%;pointer-events:auto;touch-action:none}
+#vkDpad{position:absolute;left:12px;bottom:20px;width:156px;height:156px;pointer-events:auto}
+#vkActions{position:absolute;right:12px;bottom:20px;display:flex;gap:8px;pointer-events:auto;flex-wrap:wrap-reverse;justify-content:flex-end;max-width:180px}
+@media (hover:none) and (pointer:coarse){#vk{display:block}}
+</style>
+<div id="vk">
+  <div id="vkDpad">
+    <div class="vk-btn vk-dpad-btn" style="top:0;left:54px" data-key="w">▲</div>
+    <div class="vk-btn vk-dpad-btn" style="top:108px;left:54px" data-key="s">▼</div>
+    <div class="vk-btn vk-dpad-btn" style="top:54px;left:0" data-key="a">◀</div>
+    <div class="vk-btn vk-dpad-btn" style="top:54px;left:108px" data-key="d">▶</div>
+  </div>
+  <div id="vkLook"></div>
+  <div id="vkActions">
+    <div class="vk-btn vk-act-btn" style="width:64px;height:64px;background:rgba(255,107,53,0.35);border:2px solid rgba(255,107,53,0.6);font-size:22px" data-act="shoot">🔫<span style="font-size:9px;opacity:0.7;margin-top:1px">射击</span></div>
+    <div class="vk-btn vk-act-btn" style="width:52px;height:52px;background:rgba(68,180,255,0.3);border:2px solid rgba(68,180,255,0.5);font-size:18px" data-act="pick">✋</div>
+    <div class="vk-btn vk-sml" style="width:44px;height:44px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);font-size:16px" data-act="map">🗺️</div>
+    <div class="vk-btn vk-sml" style="width:44px;height:44px;background:rgba(142,68,173,0.3);border:2px solid rgba(142,68,173,0.5);font-size:16px" data-act="fly">🕊️</div>
+    <div class="vk-btn vk-sml" style="width:44px;height:44px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);font-size:14px;flex-direction:column" data-act="wpnext">🔁<span style="font-size:8px;opacity:0.6">切</span></div>
+    <div class="vk-btn vk-sml" style="width:44px;height:44px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);font-size:14px;flex-direction:column" data-act="wpprev">↩️<span style="font-size:8px;opacity:0.6">切</span></div>
+  </div>
+</div>
+<script>
+// 触屏虚拟按键逻辑
+(function(){
+  var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if(!isTouch) return;
+  document.getElementById('vk').classList.add('on');
+
+  // 方向键
+  document.querySelectorAll('#vkDpad .vk-btn').forEach(function(btn){
+    var key = btn.getAttribute('data-key');
+    function press(){K[key]=true;btn.classList.add('pressed')}
+    function release(){K[key]=false;btn.classList.remove('pressed')}
+    btn.addEventListener('touchstart',function(e){e.preventDefault();e.stopPropagation();press()});
+    btn.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();release()});
+    btn.addEventListener('touchcancel',release);
+  });
+
+  // 视角拖动
+  var lookEl = document.getElementById('vkLook');
+  var lx=null,ly=null;
+  function lookStart(e){
+    e.preventDefault();var t=e.changedTouches[0];lx=t.clientX;ly=t.clientY;
+  }
+  function lookMove(e){
+    e.preventDefault();if(!G||!G.alive){lx=null;ly=null;return}
+    var t=e.changedTouches[0];
+    if(lx!==null&&ly!==null){
+      G.dir += (t.clientX-lx)*0.005;
+      var big=5000;
+      G.pitch = Math.max(-big,Math.min(big,G.pitch+(t.clientY-ly)*15));
+    }
+    lx=t.clientX;ly=t.clientY;
+  }
+  function lookEnd(e){e.preventDefault();lx=null;ly=null}
+  lookEl.addEventListener('touchstart',lookStart);
+  lookEl.addEventListener('touchmove',lookMove);
+  lookEl.addEventListener('touchend',lookEnd);
+  lookEl.addEventListener('touchcancel',lookEnd);
+
+  // 动作按钮
+  document.querySelectorAll('#vkActions .vk-btn').forEach(function(btn){
+    var act = btn.getAttribute('data-act');
+    btn.addEventListener('touchstart',function(e){
+      e.preventDefault();e.stopPropagation();
+      if(act==='shoot' && G && G.alive) G.shoot=true;
+      else if(act==='pick'){K['f']=true;K['F']=true}
+      else if(act==='map' && G){G.showMap=!G.showMap}
+      else if(act==='fly' && G && G.alive){
+        if(!G._flyC)G._flyC=0;
+        G._flyC++;
+        if(G._flyC>=2){
+          G.flying=!G.flying;
+          if(!G.flying)G._landing=true;
+          G._flyC=0;
+          if(G._flyT)clearTimeout(G._flyT);G._flyT=null;
+        }else{
+          if(G._flyT)clearTimeout(G._flyT);
+          G._flyT=setTimeout(function(){G._flyC=0;G._flyT=null},600);
+        }
+      }
+      else if(act==='wpnext' && G && G.alive){
+        G.wp=(G.wp+1)%WEAPONS.length;G.shotTimer=0;
+      }
+      else if(act==='wpprev' && G && G.alive){
+        G.wp=(G.wp-1+WEAPONS.length)%WEAPONS.length;G.shotTimer=0;
+      }
+    });
+    btn.addEventListener('touchend',function(e){
+      e.preventDefault();e.stopPropagation();
+      if(act==='pick'){K['f']=false;K['F']=false}
+    });
+    btn.addEventListener('touchcancel',function(){
+      if(act==='pick'){K['f']=false;K['F']=false}
+    });
+  });
+})();
+</script>
+</body></html>

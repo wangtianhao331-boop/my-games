@@ -303,6 +303,21 @@ ca.addEventListener('mousemove',function(e){
     G.bx=(e.clientX-rect.left)/rect.width*W;
   }
 });
+// ===== 触屏控制 =====
+ca.addEventListener('touchstart',function(e){
+  e.preventDefault();
+  if(G&&G.st==='p'){
+    var rect=ca.getBoundingClientRect();
+    G.bx=(e.touches[0].clientX-rect.left)/rect.width*W;
+  }
+});
+ca.addEventListener('touchmove',function(e){
+  e.preventDefault();
+  if(G&&G.st==='p'){
+    var rect=ca.getBoundingClientRect();
+    G.bx=(e.touches[0].clientX-rect.left)/rect.width*W;
+  }
+});
 
 // ===== 按钮 =====
 $('bGo').onclick=function(){init()};
@@ -315,6 +330,30 @@ function loop(){
   requestAnimationFrame(loop)
 }
 requestAnimationFrame(loop);
+
+// ===== 触屏虚拟方向键 =====
+(function(){
+  var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if(!isTouch) return;
+  var s = document.createElement('style');
+  s.textContent = '#vk{position:fixed;inset:0;z-index:50;pointer-events:none;touch-action:none;display:none}#vk.on{display:block}@media(hover:none)and(pointer:coarse){#vk{display:block}}.vkb{position:absolute;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-tap-highlight-color:transparent;touch-action:none;color:#fff;font-weight:bold;border-radius:10px;width:56px;height:56px;background:rgba(255,255,255,0.12);border:2px solid rgba(255,255,255,0.2);font-size:24px}.vkb:active,.vkb.pressed{background:rgba(255,255,255,0.35)}#vkDpad{position:absolute;left:12px;bottom:20px;width:130px;height:56px;pointer-events:auto}#vkDpad .vkb-l{left:0}#vkDpad .vkb-r{right:0}';
+  document.head.appendChild(s);
+  var vk = document.createElement('div'); vk.id = 'vk';
+  vk.innerHTML = '<div id="vkDpad"><div class="vkb vkb-l" data-k="ArrowLeft">◀</div><div class="vkb vkb-r" data-k="ArrowRight">▶</div></div>';
+  document.body.appendChild(vk);
+  vk.classList.add('on');
+  document.querySelectorAll('#vkDpad .vkb').forEach(function(btn){
+    var k = btn.getAttribute('data-k');
+    function p(){K[k]=true;btn.classList.add('pressed')}
+    function r(){K[k]=false;btn.classList.remove('pressed')}
+    btn.addEventListener('touchstart',function(e){e.preventDefault();e.stopPropagation();p()});
+    btn.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();r()});
+    btn.addEventListener('touchcancel',r);
+    btn.addEventListener('mousedown',p);
+    btn.addEventListener('mouseup',r);
+    btn.addEventListener('mouseleave',r);
+  });
+})();
 })();
 </script>
 </body>

@@ -309,6 +309,26 @@ ca.addEventListener('mousedown',function(e){
 ca.addEventListener('mouseup',function(e){
   mouseDown=false;if(G)G.mouseDown=false;
 });
+// ===== 触屏支持 =====
+ca.addEventListener('touchstart',function(e){
+  e.preventDefault();
+  if(G&&G.st==='p'){
+    var rect=ca.getBoundingClientRect();
+    G.gx=(e.touches[0].clientX-rect.left)/rect.width*W;
+    mouseDown=true;G.mouseDown=true;
+  }
+});
+ca.addEventListener('touchmove',function(e){
+  e.preventDefault();
+  if(G&&G.st==='p'){
+    var rect=ca.getBoundingClientRect();
+    G.gx=(e.touches[0].clientX-rect.left)/rect.width*W;
+  }
+});
+ca.addEventListener('touchend',function(e){
+  e.preventDefault();
+  mouseDown=false;if(G)G.mouseDown=false;
+});
 
 // 按钮
 $('bGo').onclick=function(){init()};
@@ -320,6 +340,37 @@ function loop(){
   requestAnimationFrame(loop)
 }
 requestAnimationFrame(loop);
+
+// ===== 触屏虚拟按钮 =====
+(function(){
+  var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if(!isTouch) return;
+  var s = document.createElement('style');
+  s.textContent = '#vk{position:fixed;inset:0;z-index:50;pointer-events:none;touch-action:none;display:none}#vk.on{display:block}@media(hover:none)and(pointer:coarse){#vk{display:block}}.vkb{position:absolute;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-tap-highlight-color:transparent;touch-action:none;color:#fff;font-weight:bold}#vkFire{position:absolute;right:20px;bottom:30px;width:72px;height:72px;border-radius:50%;background:rgba(255,107,53,0.35);border:3px solid rgba(255,107,53,0.6);font-size:28px;flex-direction:column;pointer-events:auto}.vkb:active{transform:scale(0.9)}#vkFire .lbl{font-size:10px;opacity:0.7;margin-top:2px}';
+  document.head.appendChild(s);
+  var vk = document.createElement('div'); vk.id = 'vk';
+  vk.innerHTML = '<div class="vkb" id="vkFire">🔫<span class="lbl">射击</span></div>';
+  document.body.appendChild(vk);
+  vk.classList.add('on');
+
+  // 射击按钮：按住持续射击（游戏自动处理射击逻辑）
+  var fireBtn = document.getElementById('vkFire');
+  function startFire(){ if(G) G.mouseDown = true; }
+  function stopFire(){ if(G) G.mouseDown = false; }
+  fireBtn.addEventListener('touchstart', function(e){
+    e.preventDefault(); e.stopPropagation();
+    startFire();
+  });
+  fireBtn.addEventListener('touchend', function(e){
+    e.preventDefault(); e.stopPropagation();
+    stopFire();
+  });
+  fireBtn.addEventListener('touchcancel', stopFire);
+  // 鼠标支持
+  fireBtn.addEventListener('mousedown', startFire);
+  fireBtn.addEventListener('mouseup', stopFire);
+  fireBtn.addEventListener('mouseleave', stopFire);
+})();
 })();
 </script>
 </body>

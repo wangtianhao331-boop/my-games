@@ -106,8 +106,25 @@ var K={},aK=false;
 document.addEventListener('keydown',function(e){K[e.key]=true;if(e.key===' ')e.preventDefault()
 if(e.key==='j'||e.key==='J')aK=true});
 document.addEventListener('keyup',function(e){K[e.key]=false;if(e.key==='j'||e.key==='J')aK=false});
-document.addEventListener('touchstart',function(e){e.preventDefault();aK=true});
-document.addEventListener('touchend',function(e){e.preventDefault();aK=false});
+// 触屏控制：左1/3=左移，右1/3=右移，中间=跳，任何触摸也触发跳跃
+document.addEventListener('touchstart',function(e){
+  e.preventDefault();aK=true;
+  if(G&&G.st==='p'){
+    var tx=e.touches[0].clientX/W;
+    K['ArrowLeft']=tx<0.35;K['ArrowRight']=tx>0.65;
+  }
+});
+document.addEventListener('touchmove',function(e){
+  e.preventDefault();
+  if(G&&G.st==='p'){
+    var tx=e.touches[0].clientX/W;
+    K['ArrowLeft']=tx<0.35;K['ArrowRight']=tx>0.65;
+  }
+});
+document.addEventListener('touchend',function(e){
+  e.preventDefault();aK=false;
+  K['ArrowLeft']=false;K['ArrowRight']=false;
+});
 var G=null,SL=0,GV=0.6,GY=420;
 // 存档
 function gSV(){try{var r=localStorage.getItem('jpSave3');if(r)return JSON.parse(r)}catch(e){}return{un:0,st:{},co:0,wp:0,eb:0}}
@@ -424,4 +441,49 @@ $('btnEndAgain').onclick=function(){iG('e')}
 $('btnEndBack').onclick=function(){hideAll();show('sMenu')}
 // ---- 启动 ----
 requestAnimationFrame(lp)
+
+// ===== 触屏虚拟按键（可视化）=====
+(function(){
+  var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if(!isTouch) return;
+  var s = document.createElement('style');
+  s.textContent = '#vk{position:fixed;inset:0;z-index:50;pointer-events:none;touch-action:none;display:none}#vk.on{display:block}@media(hover:none)and(pointer:coarse){#vk{display:block}}.vkb{position:absolute;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-tap-highlight-color:transparent;touch-action:none;color:#fff;font-weight:bold}.vkb-d{width:48px;height:48px;border-radius:10px;background:rgba(255,255,255,0.12);border:2px solid rgba(255,255,255,0.2);font-size:20px}.vkb-d:active,.vkb-d.pressed{background:rgba(255,255,255,0.35)}.vkb-a{width:60px;height:60px;border-radius:50%;font-size:20px;flex-direction:column}.vkb-j{background:rgba(255,107,53,0.35);border:2px solid rgba(255,107,53,0.6)}.vkb-u{background:rgba(68,180,255,0.3);border:2px solid rgba(68,180,255,0.5)}#vkDpad{position:absolute;left:12px;bottom:20px;width:156px;height:156px;pointer-events:auto}#vkActs{position:absolute;right:12px;bottom:20px;display:flex;gap:10px;pointer-events:auto}';
+  document.head.appendChild(s);
+  var vk = document.createElement('div'); vk.id = 'vk';
+  vk.innerHTML = '<div id="vkDpad"><div class="vkb vkb-d" style="top:0;left:54px" data-k="ArrowLeft">◀</div><div class="vkb vkb-d" style="top:108px;left:54px" data-k="ArrowRight">▶</div></div><div id="vkActs"><div class="vkb vkb-a vkb-u" data-k="jump" style="background:rgba(68,180,255,0.3);border-color:rgba(68,180,255,0.5)">⬆<span style="font-size:9px;opacity:0.7;margin-top:1px">跳</span></div><div class="vkb vkb-a vkb-j" data-k="attack">⚔<span style="font-size:9px;opacity:0.7;margin-top:1px">攻击</span></div></div>';
+  document.body.appendChild(vk);
+  vk.classList.add('on');
+  
+  // 方向键触摸
+  document.querySelectorAll('#vkDpad .vkb').forEach(function(btn){
+    var k = btn.getAttribute('data-k');
+    function p(){K[k]=true;btn.classList.add('pressed')}
+    function r(){K[k]=false;btn.classList.remove('pressed')}
+    btn.addEventListener('touchstart',function(e){e.preventDefault();e.stopPropagation();p()});
+    btn.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();r()});
+    btn.addEventListener('touchcancel',r);
+    // 也支持鼠标
+    btn.addEventListener('mousedown',p);
+    btn.addEventListener('mouseup',r);
+    btn.addEventListener('mouseleave',r);
+  });
+  
+  // 跳跃按钮
+  document.querySelector('#vkActs .vkb-u').addEventListener('touchstart',function(e){
+    e.preventDefault();e.stopPropagation();
+    K['ArrowUp']=true;K[' ']=true;
+  });
+  document.querySelector('#vkActs .vkb-u').addEventListener('touchend',function(e){
+    e.preventDefault();e.stopPropagation();
+    K['ArrowUp']=false;K[' ']=false;
+  });
+  
+  // 攻击按钮
+  document.querySelector('#vkActs .vkb-j').addEventListener('touchstart',function(e){
+    e.preventDefault();e.stopPropagation();aK=true;
+  });
+  document.querySelector('#vkActs .vkb-j').addEventListener('touchend',function(e){
+    e.preventDefault();e.stopPropagation();aK=false;
+  });
+})();
 </script></body></html>

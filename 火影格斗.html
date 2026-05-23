@@ -18,8 +18,39 @@ canvas{display:block;width:100%;height:100%}
 #hud{position:fixed;top:4px;left:4px;right:4px;display:none;z-index:10;color:#fff;font-size:10px}
 #hud.on{display:flex;justify-content:space-between}
 #hud>div{background:rgba(0,0,0,0.6);padding:2px 6px;border-radius:4px;display:flex;gap:6px;align-items:center}
+</style>
+/* ===== 触屏虚拟按钮 ===== */
+#touchCtl{position:fixed;bottom:0;left:0;right:0;z-index:50;display:none;pointer-events:none;height:180px}
+#touchCtl.on{display:block}
+.tc-dpad{position:absolute;left:10px;bottom:10px;width:160px;height:160px;pointer-events:auto}
+.tc-dpad-btn{position:absolute;width:52px;height:52px;border-radius:12px;background:rgba(255,255,255,0.12);border:2px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;user-select:none;-webkit-tap-highlight-color:transparent;touch-action:none}
+.tc-dpad-btn:active{background:rgba(255,255,255,0.25)}
+.tc-up{top:0;left:54px}.tc-down{top:108px;left:54px}.tc-left{top:54px;left:0}.tc-right{top:54px;left:108px}
+.tc-actions{position:absolute;right:10px;bottom:10px;display:flex;gap:10px;pointer-events:auto}
+.tc-btn{width:60px;height:60px;border-radius:50%;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:12px;color:#fff;font-weight:bold;user-select:none;-webkit-tap-highlight-color:transparent;touch-action:none}
+.tc-btn-at{background:rgba(255,107,53,0.35);border-color:rgba(255,107,53,0.6)}
+.tc-btn-sk{background:rgba(68,180,255,0.3);border-color:rgba(68,180,255,0.5)}
+.tc-btn-sk2{background:rgba(142,68,173,0.3);border-color:rgba(142,68,173,0.5)}
+.tc-btn:active{transform:scale(0.9)}
+.tc-btn .tc-label{font-size:9px;opacity:0.7;margin-top:1px}
+@media (hover:none) and (pointer:coarse){#touchCtl{display:block}}
+@media (min-width:768px){#touchCtl{display:none!important}}
 </style></head><body>
 <canvas id="c"></canvas>
+<!-- 触屏虚拟按钮 -->
+<div id="touchCtl">
+  <div class="tc-dpad">
+    <div class="tc-dpad-btn tc-up" data-key="w">▲</div>
+    <div class="tc-dpad-btn tc-down" data-key="s">▼</div>
+    <div class="tc-dpad-btn tc-left" data-key="a">◀</div>
+    <div class="tc-dpad-btn tc-right" data-key="d">▶</div>
+  </div>
+  <div class="tc-actions">
+    <div class="tc-btn tc-btn-at" data-action="j">⚔<span class="tc-label">攻击</span></div>
+    <div class="tc-btn tc-btn-sk" data-action="k">🌀<span class="tc-label">技能1</span></div>
+    <div class="tc-btn tc-btn-sk2" data-action="l">💥<span class="tc-label">技能2</span></div>
+  </div>
+</div>
 <div class="ov on" id="m1"><div class="pn"><h1 style="font-size:26px">忍界大战</h1><p>满配 | 金币:无限 点券:无限</p>
 <button class="btn or" id="mA">决斗场</button><br>
 <button class="btn bl" id="mD">冒险副本</button><br>
@@ -65,6 +96,55 @@ document.addEventListener('keydown',function(e){K[e.key]=true
 if(e.key==='j'||e.key==='J')aK=true;if(e.key==='k'||e.key==='K')s1K=true;if(e.key==='l'||e.key==='L')s2K=true});
 document.addEventListener('keyup',function(e){K[e.key]=false
 if(e.key==='j'||e.key==='J')aK=false;if(e.key==='k'||e.key==='K')s1K=false;if(e.key==='l'||e.key==='L')s2K=false});
+// ===== 触屏虚拟按钮 =====
+(function(){
+  var tc=document.getElementById('touchCtl');
+  function simKey(key,down){
+    if(down){K[key]=true}else{K[key]=false}
+  }
+  // 方向键触摸
+  tc.querySelectorAll('.tc-dpad-btn').forEach(function(btn){
+    var key=btn.getAttribute('data-key');
+    btn.addEventListener('touchstart',function(e){
+      e.preventDefault();e.stopPropagation();simKey(key,true);
+    });
+    btn.addEventListener('touchend',function(e){
+      e.preventDefault();e.stopPropagation();simKey(key,false);
+    });
+    btn.addEventListener('touchcancel',function(e){
+      simKey(key,false);
+    });
+  });
+  // 动作按钮
+  tc.querySelectorAll('.tc-actions .tc-btn').forEach(function(btn){
+    var act=btn.getAttribute('data-action');
+    btn.addEventListener('touchstart',function(e){
+      e.preventDefault();e.stopPropagation();
+      if(act==='j')aK=true;
+      else if(act==='k')s1K=true;
+      else if(act==='l')s2K=true;
+    });
+    btn.addEventListener('touchend',function(e){
+      e.preventDefault();e.stopPropagation();
+      if(act==='j')aK=false;
+      else if(act==='k')s1K=false;
+      else if(act==='l')s2K=false;
+    });
+    btn.addEventListener('touchcancel',function(e){
+      if(act==='j')aK=false;
+      else if(act==='k')s1K=false;
+      else if(act==='l')s2K=false;
+    });
+  });
+  // 游戏中显示触屏按钮
+  var origSM=sM;sM=function(p1,p2,m,st){
+    origSM(p1,p2,m,st);tc.classList.add('on');
+  };
+  // 菜单隐藏触屏按钮
+  var origHA=hA;hA=function(){
+    origHA();tc.classList.remove('on');
+  };
+})();
 var G=null,SL=0,GM='',WI=[0,0],DST=0,GV=0.6,GY=400;
 function mF(id,x,y,d){
   var c=C[id];return{cid:id,x:x,y:y,w:40,h:76,vx:0,vy:0,dir:d,hp:c.hp,mh:c.hp,ck:100,
