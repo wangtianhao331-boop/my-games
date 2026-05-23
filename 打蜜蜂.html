@@ -45,16 +45,16 @@ window.addEventListener('resize',sz);sz();
 var G=null;
 // 蜜蜂类型
 var BEE_TYPES=[
-  {e:'🐝',c:'#ffd43b',s:1,spd:1,size:26,hp:1},
-  {e:'🐝',c:'#ff8c00',s:2,spd:1.5,size:28,hp:2},
-  {e:'🐞',c:'#e74c3c',s:3,spd:1.8,size:24,hp:1},
-  {e:'🦋',c:'#9b59b6',s:4,spd:2,size:30,hp:1},
-  {e:'⭐',c:'#ffd700',s:5,spd:1.2,size:22,hp:1},
+  {e:'🐝',c:'#ffd43b',s:1,spd:0.7,size:44,hp:1},
+  {e:'🐝',c:'#ff8c00',s:2,spd:1.0,size:48,hp:2},
+  {e:'🐞',c:'#e74c3c',s:3,spd:1.2,size:42,hp:1},
+  {e:'🦋',c:'#9b59b6',s:4,spd:1.4,size:46,hp:1},
+  {e:'⭐',c:'#ffd700',s:5,spd:0.9,size:40,hp:1},
 ];
 function init(){
   G={
     st:'p',fr:0,score:0,combo:0,maxCombo:0,
-    bees:[],spawnT:0,spawnI:30,
+    bees:[],spawnT:0,spawnI:50,
     time:60,best:parseInt(localStorage.getItem('sbBest'))||0,
     hitFX:[],
   };
@@ -75,10 +75,10 @@ function update(){
     var t=BEE_TYPES[typeIdx];
     var side=Math.floor(Math.random()*4);
     var x,y,vx,vy;
-    if(side===0){x=-30;y=50+Math.random()*(H-100);vx=t.spd*(1+Math.random()*0.5);vy=(Math.random()-0.5)*t.spd}
-    else if(side===1){x=W+30;y=50+Math.random()*(H-100);vx=-t.spd*(1+Math.random()*0.5);vy=(Math.random()-0.5)*t.spd}
-    else if(side===2){x=50+Math.random()*(W-100);y=-30;vx=(Math.random()-0.5)*t.spd*1.5;vy=t.spd*(1+Math.random()*0.5)}
-    else{x=50+Math.random()*(W-100);y=H+30;vx=(Math.random()-0.5)*t.spd*1.5;vy=-t.spd*(1+Math.random()*0.5)}
+    if(side===0){x=-30;y=50+Math.random()*(H-100);vx=t.spd*(0.5+Math.random()*0.5);vy=(Math.random()-0.5)*t.spd*0.5}
+    else if(side===1){x=W+30;y=50+Math.random()*(H-100);vx=-t.spd*(0.5+Math.random()*0.5);vy=(Math.random()-0.5)*t.spd*0.5}
+    else if(side===2){x=50+Math.random()*(W-100);y=-30;vx=(Math.random()-0.5)*t.spd;vy=t.spd*(0.5+Math.random()*0.5)}
+    else{x=50+Math.random()*(W-100);y=H+30;vx=(Math.random()-0.5)*t.spd;vy=-t.spd*(0.5+Math.random()*0.5)}
     g.bees.push({
       x:x,y:y,vx:vx,vy:vy,type:t,
       hp:t.hp,size:t.size,wobble:Math.random()*6.28,
@@ -139,6 +139,9 @@ function render(){
   for(var i=0;i<g.bees.length;i++){
     var b=g.bees[i];
     cx.save();cx.translate(b.x,b.y);
+    // 半透明瞄准圈(方便点击)
+    cx.fillStyle='rgba(255,255,255,0.08)';cx.beginPath();cx.arc(0,0,b.size*1.2,0,Math.PI*2);cx.fill();
+    cx.strokeStyle='rgba(255,255,255,0.06)';cx.lineWidth=1;cx.beginPath();cx.arc(0,0,b.size*1.8,0,Math.PI*2);cx.stroke();
     // 被击中闪白
     if(b.hp<=0){
       cx.globalAlpha=0.5;
@@ -182,7 +185,7 @@ ca.addEventListener('click',function(e){
   for(var i=G.bees.length-1;i>=0;i--){
     var b=G.bees[i];
     var dx=mx-b.x,dy=my-b.y;
-    if(dx*dx+dy*dy<b.size*b.size){
+    if(dx*dx+dy*dy<(b.size*2)*(b.size*2)){
       b.hp--;
       if(b.hp<=0){
         b.alive=false;
