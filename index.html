@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的游戏合集</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;min-height:100%;background:#0f0c29;font-family:'Segoe UI',Arial,sans-serif;color:#fff}
+body{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e)}
+.container{max-width:1000px;margin:0 auto;padding:40px 20px}
+h1{text-align:center;font-size:38px;margin-bottom:10px;background:linear-gradient(90deg,#ffd43b,#ff6b35,#ffd43b);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.sub{text-align:center;color:#8899bb;font-size:14px;margin-bottom:40px}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:30px 24px;text-align:center;transition:all 0.3s ease;cursor:pointer;text-decoration:none;color:#fff;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-6px);border-color:#ffd43b;background:rgba(255,255,255,0.1);box-shadow:0 12px 40px rgba(255,212,59,0.15)}
+.card .icon{font-size:56px;margin-bottom:12px;display:block}
+.card h2{font-size:22px;margin-bottom:6px}
+.card .desc{font-size:13px;color:#8899bb;margin-bottom:4px;line-height:1.5}
+.card .tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;margin-top:8px;font-weight:bold}
+.tag-jump{background:rgba(68,180,255,0.2);color:#44b4ff;border:1px solid rgba(68,180,255,0.3)}
+.tag-fight{background:rgba(255,107,53,0.2);color:#ff6b35;border:1px solid rgba(255,107,53,0.3)}
+.tag-horror{background:rgba(231,76,60,0.2);color:#e74c3c;border:1px solid rgba(231,76,60,0.3)}
+.howto{margin-top:50px;padding:24px;background:rgba(255,255,255,0.04);border-radius:12px;border:1px solid rgba(255,255,255,0.06)}
+.howto h3{color:#ffd43b;font-size:16px;margin-bottom:10px}
+.howto p{font-size:13px;color:#8899bb;line-height:1.8}
+.howto kbd{background:rgba(255,255,255,0.1);padding:2px 8px;border-radius:4px;font-size:12px;border:1px solid rgba(255,255,255,0.15);color:#fff}
+footer{text-align:center;margin-top:40px;font-size:12px;color:#556}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>&#127918; 我的游戏合集</h1>
+  <p class="sub">三个小游戏，在线畅玩</p>
+
+  <div class="games">
+    <a class="card" href="跳跃闯关.html">
+      <span class="icon">&#127963;</span>
+      <h2>跳跃闯关</h2>
+      <p class="desc">平台跳跃闯关游戏<br>8个关卡 + 无尽模式<br>收集金币，购买武器，挑战Boss</p>
+      <span class="tag tag-jump">&#x2191; 跳跃 &#x2190;&#x2192; 移动 J 攻击</span>
+    </a>
+
+    <a class="card" href="火影格斗.html">
+      <span class="icon">&#x2694;</span>
+      <h2>火影格斗</h2>
+      <p class="desc">忍者对战格斗游戏<br>15个忍者角色可选<br>决斗场 + 冒险副本</p>
+      <span class="tag tag-fight">&#x2190;&#x2192; 移动 J攻击 K技能1 L技能2</span>
+    </a>
+
+    <a class="card" href="恐怖3D.html">
+      <span class="icon">&#128123;</span>
+      <h2>恐怖3D</h2>
+      <p class="desc">第一人称3D恐怖游戏<br>复古射线投射渲染<br>收集钥匙，找到出口逃生</p>
+      <span class="tag tag-horror">WASD移动 鼠标转头 左键射击</span>
+    </a>
+  </div>
+
+  <div class="howto">
+    <h3>&#128736; 操作说明</h3>
+    <p>
+      <b>跳跃闯关：</b><kbd>W</kbd> 跳跃 <kbd>A/D</kbd> 移动 <kbd>J</kbd> 攻击（需购买武器）<br>
+      <b>火影格斗：</b><kbd>W/A/S/D</kbd> 移动 <kbd>J</kbd> 攻击 <kbd>K</kbd> 技能1 <kbd>L</kbd> 技能2<br>
+      <b>恐怖3D：</b><kbd>W/A/S/D</kbd> 移动 <kbd>鼠标</kbd> 转头 <kbd>左键</kbd> 射击 <kbd>F</kbd> 拾取 <kbd>M</kbd> 地图 <kbd>空格x2</kbd> 飞行
+    </p>
+  </div>
+
+  <footer>GitHub Pages 在线游戏</footer>
+</div>
+</body>
+</html>
