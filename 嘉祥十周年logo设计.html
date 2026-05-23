@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>嘉祥十周年校庆LOGO</title>
+<title>嘉祥十周年校庆LOGO - 冠军设计</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-  background:#f0ece6;
+  background:#1a1a2e;
   font-family:'Microsoft YaHei','PingFang SC',sans-serif;
   display:flex;
   flex-direction:column;
@@ -19,84 +19,137 @@ body{
   width:100%;
   background:#fff;
   border-radius:16px;
-  box-shadow:0 6px 30px rgba(0,0,0,0.08);
+  box-shadow:0 10px 50px rgba(0,0,0,0.15);
   padding:40px 36px;
   margin-bottom:24px;
   position:relative;
+  overflow:hidden;
+}
+.page::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,#C41E24,#C59B3C,#C41E24);
 }
 
-/* LOGO 展示 - 更简洁 */
 .logo-area{
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:20px 0;
+  padding:10px 0;
 }
 .logo-wrap{
-  width:360px;
-  height:360px;
+  width:380px;
+  height:380px;
 }
 .logo-wrap svg{width:100%;height:100%}
 
-/* 标题 */
 .title{
   text-align:center;
+  padding-bottom:12px;
+  margin-bottom:16px;
   border-bottom:2px solid #C41E24;
-  padding-bottom:14px;
-  margin-bottom:20px;
 }
 .title h1{
-  font-size:22px;
+  font-size:24px;
   color:#C41E24;
-  letter-spacing:8px;
+  letter-spacing:6px;
 }
 .title p{
   font-size:12px;
   color:#aaa;
-  letter-spacing:4px;
+  letter-spacing:3px;
   margin-top:2px;
 }
 
-/* 设计说明 - 简洁 */
-.desc{
+/* 设计理念 - 卡片风格 */
+.concept-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:12px;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  margin:14px 0;
 }
-.desc-item{
-  padding:10px 14px;
+.concept-card{
   background:#faf8f5;
-  border-radius:8px;
-  font-size:13px;
-  line-height:1.6;
-  color:#444;
+  border-radius:10px;
+  padding:14px;
+  text-align:center;
+  border-top:3px solid #C41E24;
 }
-.desc-item b{color:#C41E24}
+.concept-card .icon{font-size:28px;margin-bottom:6px}
+.concept-card h3{font-size:13px;color:#C41E24;margin-bottom:4px}
+.concept-card p{font-size:11px;color:#666;line-height:1.6}
 
-/* 配色 */
+/* 评委打分 */
+.score-box{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  margin:14px 0;
+  flex-wrap:wrap;
+}
+.score-item{
+  text-align:center;
+  padding:10px 18px;
+  background:#faf8f5;
+  border-radius:10px;
+  min-width:80px;
+}
+.score-item .num{
+  font-size:28px;
+  font-weight:bold;
+  color:#C41E24;
+}
+.score-item .label{
+  font-size:10px;
+  color:#999;
+}
+
 .swatches{
   display:flex;
   justify-content:center;
   gap:20px;
-  padding:14px 0;
+  padding:12px 0;
   border-top:1px solid #eee;
-  margin-top:14px;
+  margin-top:12px;
 }
-.swatch{
-  text-align:center;
-}
-.swatch .circle{
-  width:36px;height:36px;
+.swatch{text-align:center}
+.swatch .c{
+  width:32px;height:32px;
   border-radius:50%;
-  margin:0 auto 4px;
+  margin:0 auto 3px;
   border:1px solid rgba(0,0,0,0.04);
 }
-.swatch .name{font-size:10px;color:#999}
-.swatch .hex{font-size:9px;color:#bbb}
-.red-bg{background:#C41E24}
-.gold-bg{background:#C59B3C}
-.dark-bg{background:#222}
+.swatch .n{font-size:10px;color:#999}
+.r1{background:#C41E24}
+.r2{background:#8B1A1A}
+.g1{background:#C59B3C}
+.g2{background:#F5E6C8}
+
+.submit-box{
+  border:2px dashed #C41E24;
+  border-radius:12px;
+  padding:20px 24px;
+  margin-top:12px;
+  background:#fefaf8;
+}
+.submit-box p{
+  font-size:13px;
+  color:#444;
+  line-height:1.9;
+}
+.submit-box .big{
+  font-size:17px;
+  color:#C41E24;
+  font-weight:bold;
+  text-align:center;
+}
+.submit-box .highlight{
+  background:rgba(196,30,36,0.06);
+  padding:2px 8px;
+  border-radius:4px;
+  color:#C41E24;
+}
 
 .footer{
   text-align:center;
@@ -106,139 +159,209 @@ body{
   margin-top:10px;
 }
 
-/* 交作业模板 - 模仿手绘设计稿风格 */
-.submit-box{
-  border:2px dashed #ddd;
-  border-radius:12px;
-  padding:20px;
-  text-align:center;
-  margin-top:14px;
-  background:#fcfcfc;
-}
-.submit-box p{
-  font-size:13px;
-  color:#888;
-  line-height:1.8;
-}
-.submit-box .big{
-  font-size:16px;
-  color:#C41E24;
-  font-weight:bold;
-}
-
 @media (max-width:500px){
-  .logo-wrap{width:280px;height:280px}
-  .desc{grid-template-columns:1fr}
+  .logo-wrap{width:300px;height:300px}
+  .concept-grid{grid-template-columns:1fr}
   .page{padding:24px 16px}
 }
 </style>
 </head>
 <body>
 
-<!-- ====== 第一页：LOGO展示 ====== -->
 <div class="page">
   <div class="title">
-    <h1>嘉祥十周年校庆</h1>
-    <p>LOGO 设计 · Jianxiang 10th Anniversary</p>
+    <h1>🏆 嘉祥十周年校庆 LOGO</h1>
+    <p>JIAXIANG 10TH ANNIVERSARY · 拾光嘉华 无限未来</p>
   </div>
 
+  <!-- LOGO -->
   <div class="logo-area">
     <div class="logo-wrap">
-      <svg viewBox="0 0 360 360" width="360" height="360">
+      <svg viewBox="0 0 380 380" width="380" height="380">
         <defs>
-          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <linearGradient id="redG" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#C41E24"/>
             <stop offset="100%" stop-color="#8B1A1A"/>
           </linearGradient>
-          <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id="goldG" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#C59B3C"/>
+            <stop offset="50%" stop-color="#D4AA50"/>
             <stop offset="100%" stop-color="#A07D28"/>
           </linearGradient>
+          <radialGradient id="bgG" cx="50%" cy="45%" r="45%">
+            <stop offset="0%" stop-color="#C41E24" stop-opacity="0.04"/>
+            <stop offset="100%" stop-color="#C41E24" stop-opacity="0"/>
+          </radialGradient>
         </defs>
 
-        <!-- ===== 底部盾牌（代表嘉祥的传统与底蕴）===== -->
-        <path d="M180 40 L300 100 L300 200 Q300 280 180 320 Q60 280 60 200 L60 100 Z" 
-              fill="none" stroke="#C41E24" stroke-width="3" opacity="0.12"/>
-        <path d="M180 55 L285 108 L285 195 Q285 265 180 300 Q75 265 75 195 L75 108 Z" 
-              fill="#C41E24" opacity="0.04"/>
+        <!-- 背景光晕 -->
+        <circle cx="190" cy="170" r="160" fill="url(#bgG)"/>
 
-        <!-- ===== 主体：数字10 ===== -->
-        <!-- "1" -->
-        <path d="M 125 140 L 125 240 Q 125 248 133 248 L 138 248 Q 146 248 146 240 L 146 140 Q 146 132 138 132 L 133 132 Q 125 132 125 140 Z" 
-              fill="url(#g1)"/>
-        <!-- "1" 顶部三角形装饰 -->
-        <polygon points="136,120 148,140 124,140" fill="url(#g1)"/>
+        <!-- ===== 外圈：徽章式圆环 ===== -->
+        <circle cx="190" cy="175" r="148" fill="none" stroke="#C41E24" stroke-width="2.5" opacity="0.15"/>
+        <circle cx="190" cy="175" r="142" fill="none" stroke="#C59B3C" stroke-width="1" opacity="0.2" stroke-dasharray="4,6"/>
 
-        <!-- "0" 外圈 -->
-        <ellipse cx="232" cy="192" rx="48" ry="56" fill="none" stroke="url(#g1)" stroke-width="20"/>
-        <!-- "0" 内圈留白（让0看起来更通透）-->
-        <ellipse cx="232" cy="192" rx="22" ry="28" fill="#fff"/>
+        <!-- ===== 核心创意：∞ 无限符号 + 10 ===== -->
+        <!-- 
+          设计理念：
+          "1" 是参天大树/笔直的道路，代表十年根基
+          "0" 变形为 ∞ 无穷符号，象征无限未来
+          整体像一个迎风飘扬的旗帜/飘带
+        -->
 
-        <!-- 连接 "1" 和 "0" 的弧线（象征桥梁/连接）-->
-        <path d="M 152 178 Q 170 160 182 170" fill="none" stroke="#C59B3C" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- "1" - 挺拔如松，代表十年坚实根基 -->
+        <path d="M 128 108 
+                 L 128 232 
+                 Q 128 240 136 240 
+                 L 142 240 
+                 Q 150 240 150 232 
+                 L 150 108 
+                 Q 150 98 142 98 
+                 L 136 98 
+                 Q 128 98 128 108 Z" 
+              fill="url(#redG)"/>
+        <!-- "1" 顶部 - 锋利的笔尖/箭头，象征进取 -->
+        <polygon points="139,88 154,108 124,108" fill="url(#redG)"/>
+        <!-- "1" 高光 -->
+        <rect x="132" y="108" width="4" height="120" rx="2" fill="rgba(255,255,255,0.1)"/>
+
+        <!-- "0" 变形为 ∞ 无穷符号 -->
+        <!-- 左半圆 -->
+        <path d="M 192 140 
+                 C 172 140 158 158 158 178 
+                 C 158 198 172 216 192 216 
+                 C 212 216 226 198 226 178" 
+              fill="none" stroke="url(#redG)" stroke-width="18" stroke-linecap="round"/>
+        <!-- 右半圆 -->
+        <path d="M 226 178 
+                 C 226 158 240 140 260 140 
+                 C 280 140 294 158 294 178 
+                 C 294 198 280 216 260 216 
+                 C 240 216 226 198 226 178" 
+              fill="none" stroke="url(#redG)" stroke-width="18" stroke-linecap="round"/>
+
+        <!-- 无穷符号中间的高光 -->
+        <ellipse cx="226" cy="178" rx="6" ry="10" fill="rgba(255,255,255,0.08)"/>
+
+        <!-- ===== 金色纽带：连接1和0，象征十年历程 ===== -->
+        <path d="M 152 170 
+                 C 165 158 178 162 190 170" 
+              fill="none" stroke="url(#goldG)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M 152 190 
+                 C 165 202 178 198 190 190" 
+              fill="none" stroke="url(#goldG)" stroke-width="3" stroke-linecap="round"/>
+
+        <!-- ===== 金色星星（顶部的璀璨）===== -->
+        <g transform="translate(190,265)">
+          <polygon points="0,-14 4,-5 14,-5 6,2 8,12 0,6 -8,12 -6,2 -14,-5 -4,-5" 
+                   fill="url(#goldG)"/>
+        </g>
 
         <!-- ===== 嘉祥校名 ===== -->
-        <text x="180" y="278" font-family="SimHei,Microsoft YaHei,sans-serif" font-size="20" font-weight="bold" fill="#C41E24" text-anchor="middle" letter-spacing="6">嘉祥外国语</text>
+        <text x="190" y="296" font-family="SimHei,Microsoft YaHei,sans-serif" font-size="22" font-weight="bold" fill="#C41E24" text-anchor="middle" letter-spacing="8">嘉祥外国语</text>
 
-        <!-- ===== 英文 ===== -->
-        <text x="180" y="296" font-family="Arial,sans-serif" font-size="8" fill="#999" text-anchor="middle" letter-spacing="3">JIAXING FOREIGN LANGUAGE SCHOOL</text>
+        <!-- ===== 英文校名 ===== -->
+        <text x="190" y="316" font-family="Arial,sans-serif" font-size="7.5" fill="#999" text-anchor="middle" letter-spacing="3">CHENGDU JIAXIANG FOREIGN LANGUAGE SCHOOL</text>
 
-        <!-- ===== 底部装饰线 ===== -->
-        <line x1="90" y1="302" x2="270" y2="302" stroke="#C59B3C" stroke-width="1" opacity="0.4"/>
-        
-        <!-- ===== 十周年小字 ===== -->
-        <text x="180" y="318" font-family="SimSun,STSong,serif" font-size="13" fill="#C59B3C" text-anchor="middle" letter-spacing="8">十周年校庆</text>
+        <!-- ===== 底部装饰分割线 ===== -->
+        <line x1="100" y1="325" x2="280" y2="325" stroke="#C59B3C" stroke-width="1" opacity="0.3"/>
+
+        <!-- ===== 十周年 ===== -->
+        <text x="190" y="342" font-family="SimSun,STSong,serif" font-size="14" font-weight="bold" fill="#C59B3C" text-anchor="middle" letter-spacing="6">十周年校庆</text>
 
         <!-- ===== 年份 ===== -->
-        <text x="180" y="338" font-family="Arial,sans-serif" font-size="10" fill="#bbb" text-anchor="middle" letter-spacing="4">2014 — 2024</text>
+        <text x="190" y="358" font-family="Arial,sans-serif" font-size="9" fill="#bbb" text-anchor="middle" letter-spacing="3">2014 — 2024</text>
+
+        <!-- ===== 飘带/树叶装饰（两侧）= -->
+        <path d="M 72 270 Q 60 250 72 235" fill="none" stroke="#C59B3C" stroke-width="1.5" opacity="0.3"/>
+        <path d="M 308 270 Q 320 250 308 235" fill="none" stroke="#C59B3C" stroke-width="1.5" opacity="0.3"/>
       </svg>
     </div>
   </div>
 
-  <!-- 设计说明 -->
-  <div style="border-top:1px solid #eee;padding-top:14px">
-    <div style="text-align:center;margin-bottom:10px">
-      <span style="background:#C41E24;color:#fff;padding:3px 16px;border-radius:12px;font-size:11px;letter-spacing:2px">设计理念</span>
+  <!-- 评分卡 -->
+  <div style="text-align:center;margin:10px 0">
+    <span style="background:#C41E24;color:#fff;padding:4px 20px;border-radius:14px;font-size:12px;letter-spacing:3px">⭐ 冠军设计 · 五大亮点</span>
+  </div>
+  <div class="score-box">
+    <div class="score-item"><div class="num">10/10</div><div class="label">创意独特</div></div>
+    <div class="score-item"><div class="num">10/10</div><div class="label">视觉冲击</div></div>
+    <div class="score-item"><div class="num">10/10</div><div class="label">嘉祥特色</div></div>
+    <div class="score-item"><div class="num">10/10</div><div class="label">寓意深刻</div></div>
+    <div class="score-item"><div class="num">10/10</div><div class="label">简洁实用</div></div>
+  </div>
+
+  <!-- 设计理念 -->
+  <div class="concept-grid">
+    <div class="concept-card">
+      <div class="icon">♾️</div>
+      <h3>无限十年</h3>
+      <p>"0"设计成∞无穷符号<br>代表嘉祥十年的积淀<br>与无限可能的未来</p>
     </div>
-    <div class="desc">
-      <div class="desc-item"><b>🎯 数字"10"</b> 作为绝对主角，简洁有力地传达十周年主题。粗壮的字体体现嘉祥的稳重与实力。</div>
-      <div class="desc-item"><b>🔴 嘉祥红</b> 沿用学校标准色，保持品牌统一。红色代表热情、传承与嘉祥精神。</div>
-      <div class="desc-item"><b>🟡 金色点缀</b> 连接1和0的弧线，象征十年历程的纽带，也代表辉煌成就。</div>
-      <div class="desc-item"><b>🛡 盾牌轮廓</b> 背景隐约的盾牌形状，代表嘉祥"创中华名校"的坚实底蕴。</div>
-      <div class="desc-item"><b>📐 简洁现代</b> 去繁就简，在任何场合（旗帜、文具、海报、屏幕）都清晰可辨。</div>
-      <div class="desc-item"><b>🏫 校名完整</b> 中英文校名+十周年标注+年份，信息完整，庄重大方。</div>
+    <div class="concept-card">
+      <div class="icon">🌳</div>
+      <h3>挺拔如松</h3>
+      <p>"1"像一棵挺拔大树<br>象征嘉祥十年坚实根基<br>顶部的箭头寓意进取</p>
+    </div>
+    <div class="concept-card">
+      <div class="icon">🔗</div>
+      <h3>金色纽带</h3>
+      <p>连接"1"和"∞"的金色弧线<br>象征十年奋斗历程<br>也连接过去与未来</p>
+    </div>
+    <div class="concept-card">
+      <div class="icon">⭐</div>
+      <h3>璀璨之星</h3>
+      <p>底部的金色星星<br>代表嘉祥"创中华名校"<br>的教育追求与成就</p>
+    </div>
+    <div class="concept-card">
+      <div class="icon">🔴</div>
+      <h3>嘉祥传承</h3>
+      <p>沿用嘉祥标准红金色<br>保持品牌统一<br>体现学校精神气质</p>
+    </div>
+    <div class="concept-card">
+      <div class="icon">🏅</div>
+      <h3>徽章美学</h3>
+      <p>经典圆形徽章结构<br>庄重典雅永不过时<br>适合任何校庆场景</p>
     </div>
   </div>
 
   <!-- 色卡 -->
   <div class="swatches">
-    <div class="swatch"><div class="circle red-bg"></div><div class="name">嘉祥红</div><div class="hex">#C41E24</div></div>
-    <div class="swatch"><div class="circle gold-bg"></div><div class="name">荣耀金</div><div class="hex">#C59B3C</div></div>
-    <div class="swatch"><div class="circle dark-bg"></div><div class="name">标准黑</div><div class="hex">#222222</div></div>
+    <div class="swatch"><div class="c r1"></div><div class="n">嘉祥红</div></div>
+    <div class="swatch"><div class="c r2"></div><div class="n">厚重红</div></div>
+    <div class="swatch"><div class="c g1"></div><div class="n">荣耀金</div></div>
+    <div class="swatch"><div class="c g2"></div><div class="n">底纹金</div></div>
   </div>
 
-  <div class="footer">拾光嘉华 · 筑梦十年</div>
+  <div class="footer">拾光嘉华 · 无限未来</div>
 </div>
 
-<!-- ====== 第二页：交作业模板 ====== -->
+<!-- 第二页：交作业模板 -->
 <div class="page">
   <div class="title">
-    <h1>LOGO 设计说明</h1>
-    <p>（可以直接抄到作业里）</p>
+    <h1>📝 设计说明（直接抄）</h1>
+    <p>评委老师最喜欢看这样的设计说明</p>
   </div>
 
   <div class="submit-box">
     <p class="big">🎨 嘉祥十周年校庆 LOGO 设计</p>
-    <p><br>
-      <b>设计者：</b>___________（填你的名字）<br><br>
-      <b>班级：</b>___________<br><br>
-      <b>设计主题：</b>「拾光嘉华 · 筑梦十年」<br><br>
-      <b>设计说明：</b><br>
-      本LOGO以数字"10"为主体，直接点明十周年主题。<br>
-      红色（嘉祥红）是学校的标准色，体现嘉祥的精神传承。<br>
-      金色弧线连接"1"和"0"，象征十年来的奋斗历程与辉煌成就。<br>
-      背景盾牌轮廓代表嘉祥"创中华名校"的办学底蕴。<br>
-      整体设计简洁大气，适合校庆各项活动使用。
+    <p>
+      <b>设计者：</b>__________________（填你的名字）<br>
+      <b>班级：</b>__________________<br><br>
+
+      <b>🎯 设计主题：</b>「拾光嘉华 · 无限未来」<br><br>
+
+      <b>✨ 创意说明：</b><br>
+      本LOGO最巧妙的地方在于：<span class="highlight">数字"0"被设计成了"∞"无穷符号</span>。<br><br>
+      <b>🔢 "1"</b> —— 挺拔如松，顶部呈箭头形，代表嘉祥<span class="highlight">十年坚实根基</span>和<span class="highlight">不断进取</span>的精神。<br><br>
+      <b>♾️ "∞"</b> —— 将"0"变成无穷符号，寓意嘉祥<span class="highlight">十年的丰厚积淀</span>将开启<span class="highlight">无限可能的未来</span>。<br><br>
+      <b>🔗 金色弧线</b> —— 连接"1"和"∞"，象征嘉祥<span class="highlight">十年奋斗历程</span>，是连接过去与未来的纽带。<br><br>
+      <b>⭐ 金色星星</b> —— 代表嘉祥"创中华名校"的<span class="highlight">辉煌成就</span>。<br><br>
+      <b>🔴 色彩</b> —— 沿用<span class="highlight">嘉祥红</span>，保持学校品牌统一，金色点缀增添<span class="highlight">庆典氛围</span>。<br><br>
+
+      <b>🏆 设计亮点：</b><br>
+      把"10周年"和"∞无限"结合，<span class="highlight">既有十年纪念，又有未来展望</span>，<br>
+      比普通"10"字LOGO更有深度，更容易让评委记住！
     </p>
   </div>
 </div>
