@@ -65,6 +65,23 @@ canvas{display:block;width:100%;height:100%}
 //  零外部依赖，秒开
 // ============================================================
 
+// 全局错误捕获，防止白屏
+window.onerror = function(msg, url, line){
+  var ca2 = document.getElementById('c');
+  if(ca2){
+    var ctx = ca2.getContext('2d');
+    ctx.fillStyle = '#0a1a0a';
+    ctx.fillRect(0,0,ca2.width,ca2.height);
+    ctx.fillStyle = '#ff6b6b';
+    ctx.font = '14px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('加载错误: '+msg, ca2.width/2, ca2.height/2);
+    ctx.fillStyle = '#889';
+    ctx.font = '11px Arial';
+    ctx.fillText('行'+line, ca2.width/2, ca2.height/2+24);
+  }
+};
+
 var ca = document.getElementById('c'), cx = ca.getContext('2d');
 var W, H;
 
@@ -539,14 +556,10 @@ function render(){
   // ---- 小地图 ----
   var mmW=80, mmH=50, mmX=FW-mmW-10, mmY=10;
   cx.fillStyle = 'rgba(0,0,0,0.3)';
-  cx.beginPath();
-  cx.roundRect(mmX, mmY, mmW, mmH, 5);
-  cx.fill();
+  cx.fillRect(mmX, mmY, mmW, mmH);
   cx.strokeStyle = 'rgba(255,255,255,0.1)';
   cx.lineWidth = 0.5;
-  cx.beginPath();
-  cx.roundRect(mmX, mmY, mmW, mmH, 5);
-  cx.stroke();
+  cx.strokeRect(mmX, mmY, mmW, mmH);
 
   // 我方
   for(var i=0;i<myTeam.length;i++){
