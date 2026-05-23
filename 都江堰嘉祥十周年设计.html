@@ -111,13 +111,13 @@ body{
   content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
   width:16px;height:12px;background:#C41E24;border-radius:0 0 6px 6px;
 }
-.crystal-name{
+.c-name{
   margin-top:8px;font-size:20px;font-weight:bold;color:#C41E24;letter-spacing:2px;
 }
-.crystal-sub{
+.c-sub{
   font-size:10px;color:#aaa;
 }
-.crystal-desc{
+.c-desc{
   font-size:12px;color:#666;line-height:1.6;margin-top:4px;
 }
 
@@ -244,24 +244,43 @@ body{
           <div class="panda-scarf"><span class="scarf-text">10</span></div>
         </div>
       </div>
-      <div class="crystal-name">🐼 嘉嘉</div>
-      <div class="crystal-sub">Jiajia · 嘉祥的熊猫宝贝</div>
-      <div class="crystal-desc">国宝熊猫穿着透明"水壳"，像冰墩墩一样可爱。头戴银杏叶，红围巾上有金色"10"。</div>
+      <div class="c-name">🐼 嘉嘉</div>
+      <div class="c-sub">Jiajia · 嘉祥的熊猫宝贝</div>
+      <div class="c-desc">国宝熊猫穿着透明"水壳"，像冰墩墩一样可爱。头戴银杏叶，红围巾上有金色"10"。</div>
     </div>
 
-    <!-- 晶晶 -->
+    <!-- 杏杏 - 银杏叶娃娃（替换水晶）-->
     <div class="mc">
       <div class="mv">
-        <div class="crystal-wrap">
-          <div class="crystal-gem">
-            <div class="crystal-face">😊</div>
-            <div class="crystal-scarf"><span style="color:#FFD700;font-size:10px;font-weight:bold">✦</span></div>
+        <div style="position:relative;width:180px;height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+          <!-- 银杏叶身体 -->
+          <div style="width:150px;height:170px;background:linear-gradient(135deg,#F5E6A0,#E8C84A,#C59B3C);border-radius:50% 50% 30% 30%;position:relative;box-shadow:inset 0 -20px 30px rgba(0,0,0,0.03),0 8px 25px rgba(197,155,60,0.15);display:flex;align-items:center;justify-content:center;flex-direction:column;">
+            <!-- 叶脉线条 -->
+            <div style="position:absolute;top:30px;left:50%;width:2px;height:100px;background:rgba(160,125,40,0.12);transform:translateX(-50%);border-radius:1px;"></div>
+            <div style="position:absolute;top:50px;left:35px;width:50px;height:1.5px;background:rgba(160,125,40,0.08);transform:rotate(-20deg);"></div>
+            <div style="position:absolute;top:50px;right:35px;width:50px;height:1.5px;background:rgba(160,125,40,0.08);transform:rotate(20deg);"></div>
+            <div style="position:absolute;top:80px;left:30px;width:45px;height:1.5px;background:rgba(160,125,40,0.08);transform:rotate(-25deg);"></div>
+            <div style="position:absolute;top:80px;right:30px;width:45px;height:1.5px;background:rgba(160,125,40,0.08);transform:rotate(25deg);"></div>
+            <!-- 高光 -->
+            <div style="position:absolute;top:18px;left:20px;right:40%;height:35px;border-radius:50%;background:rgba(255,255,255,0.2);transform:rotate(-10deg);"></div>
+            <!-- 脸 -->
+            <div style="font-size:65px;line-height:1;margin-top:10px;z-index:1;">😊</div>
+            <!-- 腮红 -->
+            <div style="position:absolute;bottom:40px;left:40px;width:14px;height:8px;border-radius:50%;background:rgba(196,30,36,0.08);"></div>
+            <div style="position:absolute;bottom:40px;right:40px;width:14px;height:8px;border-radius:50%;background:rgba(196,30,36,0.08);"></div>
+            <!-- 小银杏顶饰 -->
+            <div style="position:absolute;top:-6px;left:50%;transform:translateX(-50%);font-size:22px;">🍂</div>
           </div>
+          <!-- 红围巾 -->
+          <div style="position:absolute;bottom:48px;width:100px;height:18px;background:#C41E24;border-radius:4px;display:flex;align-items:center;justify-content:center;">
+            <span style="color:#FFD700;font-size:9px;font-weight:bold;letter-spacing:1px;">🍂</span>
+          </div>
+          <div style="position:absolute;bottom:38px;left:50%;transform:translateX(-50%);width:16px;height:12px;background:#C41E24;border-radius:0 0 6px 6px;"></div>
         </div>
       </div>
-      <div class="crystal-name">💎 晶晶</div>
-      <div class="crystal-sub">Jingjing · 都江堰的蓝水晶</div>
-      <div class="crystal-desc">圆润的蓝宝石造型，像都江堰的水一样清澈。晶莹剔透闪着星光，戴着嘉祥红围巾。</div>
+      <div class="c-name">🍂 杏杏</div>
+      <div class="c-sub">Xingxing · 都江堰的银杏</div>
+      <div class="c-desc">金灿灿的银杏叶娃娃，都江堰满城银杏的化身。温暖可爱，和嘉嘉一白一金，天生一对好朋友。</div>
     </div>
   </div>
 
@@ -273,10 +292,10 @@ body{
 
   <div class="idea">
     <div class="id"><div class="e">🧊</div><h4>冰墩墩风格</h4><p>熊猫穿透明"水壳"，和冰墩墩的冰壳一样</p></div>
-    <div class="id"><div class="e">💎</div><h4>圆润水晶</h4><p>蓝宝石圆润造型，温馨又精致</p></div>
+    <div class="id"><div class="e">🍂</div><h4>银杏杏杏</h4><p>金色银杏叶，都江堰满城银杏的化身</p></div>
     <div class="id"><div class="e">🎯</div><h4>家乡元素</h4><p>水壳=都江堰水，银杏=都江堰的秋天</p></div>
   </div>
-  <div class="ft">嘉嘉晶晶 · 都江堰的山水精灵</div>
+  <div class="ft">🐼嘉嘉 + 🍂杏杏 = 都江堰嘉祥</div>
 </div>
 
 <!-- ============================================================ -->
@@ -303,8 +322,8 @@ body{
       <b>设计者：</b>______________ <b>班级：</b>______________<br><br>
       <b>设计理念：</b><br>
       <span class="h">🐼 嘉嘉</span>：熊猫身穿透明<span class="h">"水壳"</span>（灵感来自冰墩墩），<br>代表都江堰之水。头戴银杏叶，围巾绣"10"。<br>
-      <span class="h">💎 晶晶</span>：圆润蓝宝石造型，<br>代表都江堰清澈的岷江水，晶莹闪烁。<br>
-      两个吉祥物<span class="h">都和都江堰的水有关</span>，<br>体现"水润嘉祥"的家乡情怀。
+      <span class="h">🍂 杏杏</span>：以都江堰满城银杏为灵感，<br>金色银杏叶造型，温暖治愈，<br>代表都江堰的人文风物。<br>
+      两个吉祥物<span class="h">一白一金、一熊猫一银杏</span>，<br>体现都江堰的自然生态与人文底蕴。
     </p>
   </div>
 </div>
