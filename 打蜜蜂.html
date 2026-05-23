@@ -3,220 +3,324 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>打蜜蜂</title>
+<title>打蜜蜂 - 射击版</title>
 <style>
 *{margin:0;padding:0}
-html,body{width:100%;height:100%;background:#87CEEB;overflow:hidden;font-family:Arial,sans-serif;cursor:crosshair}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a0a2a;font-family:Arial,sans-serif}
 canvas{display:block;width:100%;height:100%}
 .ov{position:fixed;top:0;left:0;width:100%;height:100%;display:none;background:rgba(0,0,0,0.8);z-index:100}
 .ov.on{display:flex;align-items:center;justify-content:center}
-.pn{background:#1e1e3a;border:2px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px 28px;text-align:center;color:#fff;max-width:400px;width:90%}
-.pn h1{font-size:28px;color:#ffd43b;margin-bottom:4px}
-.pn p{color:#8899bb;font-size:13px;margin:6px 0}
-.btn{display:inline-block;padding:10px 30px;border:none;border-radius:10px;font-size:15px;font-weight:bold;cursor:pointer;color:#fff;margin:4px}
-.or{background:#ff6b35}.bl{background:#44b4ff}.gr{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15)}
-#hud{position:fixed;top:8px;left:8px;right:8px;display:none;z-index:10;color:#fff;font-size:16px;text-shadow:0 2px 4px rgba(0,0,0,0.5)}
-#hud.on{display:flex;justify-content:space-between}
-#hud>div{background:rgba(0,0,0,0.4);padding:4px 14px;border-radius:8px;backdrop-filter:blur(4px)}
-.pop{position:fixed;pointer-events:none;z-index:50;font-size:24px;font-weight:bold;color:#ffd43b;text-shadow:0 0 10px rgba(255,212,59,0.5);animation:popUp 0.6s ease-out forwards}
-@keyframes popUp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-60px) scale(1.5)}}
+.pn{background:#1e1e3a;border:2px solid #ffd43b;border-radius:16px;padding:20px 28px;text-align:center;color:#fff;max-width:420px;width:90%}
+.pn h1{font-size:28px;color:#ffd43b;margin:0 0 6px 0}
+.pn p{color:#bbb;font-size:13px;margin:4px 0}
+.btn{padding:10px 28px;border:none;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;color:#fff;margin:6px 4px}
+.or{background:#ff6b35}.gr{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15)}
+#hud{position:fixed;top:10px;left:10px;right:10px;display:none;z-index:10;color:#fff;font-size:15px}
+#hud.on{display:flex;justify-content:space-between;align-items:center}
+#hud>div{background:rgba(0,0,0,0.5);padding:5px 14px;border-radius:8px}
 </style>
 </head>
 <body>
+
 <canvas id="c"></canvas>
+
 <div class="ov on" id="sMenu"><div class="pn">
-<h1>&#128029; 打蜜蜂</h1><p>点击蜜蜂得分！小心黄蜂会蜇你！</p>
-<button class="btn or" id="bStart">开始游戏</button>
-<div style="margin-top:10px;font-size:12px;color:#8899bb">
-&#128029; 普通蜜蜂 +1分 | &#128030; 大黄蜂 +3分 | ⭐ 黄金蜂 +5分
-</div>
+<h1>&#128299; 打蜜蜂 &#128299;</h1>
+<p>射击版 | 鼠标移动瞄准 + 点击开火</p>
+<p style="font-size:12px;color:#777">&#128029;小蜜蜂1分 &#128030;大黄蜂3分 ⭐黄金蜂5分 &#128293;连续命中加分</p>
+<button class="btn or" id="bGo">&#127918; 开始</button>
 </div></div>
+
 <div class="ov" id="sOver"><div class="pn">
-<h1 style="color:#ff6b6b">时间到！</h1>
-<p id="scoreInfo"></p>
-<button class="btn or" id="bAgain">再来一次</button>
-<button class="btn gr" id="bMenu">返回菜单</button>
+<h1 style="color:#ff6b6b">&#128299; 时间到！</h1>
+<p id="resText" style="font-size:15px;line-height:2"></p>
+<button class="btn or" id="bRetry">&#128260; 再来</button>
+<button class="btn gr" id="bMenu">&#127968; 菜单</button>
 </div></div>
-<div id="hud"><div><span>&#128029; 分数: <b id="hScore">0</b></span></div><div><span>⏱️ <b id="hTime">60</b>s</span> <span>🔥 连击: <b id="hCombo">0</b></span></div></div>
+
+<div id="hud">
+<div><span>&#127775; <b id="hS" style="color:#ffd43b;font-size:20px">0</b></span> <span style="margin-left:10px">🔥 <b id="hC" style="color:#ff6b35">0</b>x</span></div>
+<div><span>⏱️ <b id="hT" style="color:#44b4ff">60</b>s</span></div>
+</div>
+
 <script>
-var $=function(id){return document.getElementById(id)},ca=$('c'),cx=ca.getContext('2d'),W,H;
-function sz(){W=ca.width=window.innerWidth;H=ca.height=window.innerHeight}
-window.addEventListener('resize',sz);sz();
+(function(){
+var $=function(id){return document.getElementById(id)};
+var ca=$('c'),cx=ca.getContext('2d'),W,H;
+function resize(){W=ca.width=window.innerWidth;H=ca.height=window.innerHeight}
+window.addEventListener('resize',resize);resize();
+
+var K={};
+document.addEventListener('keydown',function(e){K[e.key]=true;if(e.key===' ')e.preventDefault()});
+document.addEventListener('keyup',function(e){K[e.key]=false});
+
 var G=null;
-// 蜜蜂类型
 var BEE_TYPES=[
-  {e:'🐝',c:'#ffd43b',s:1,spd:0.7,size:44,hp:1},
-  {e:'🐝',c:'#ff8c00',s:2,spd:1.0,size:48,hp:2},
-  {e:'🐞',c:'#e74c3c',s:3,spd:1.2,size:42,hp:1},
-  {e:'🦋',c:'#9b59b6',s:4,spd:1.4,size:46,hp:1},
-  {e:'⭐',c:'#ffd700',s:5,spd:0.9,size:40,hp:1},
+  {e:'🐝',c:'#ffd43b',s:1,spd:0.8,size:40,hp:1},
+  {e:'🐝',c:'#ff8c00',s:3,spd:1.0,size:44,hp:2},
+  {e:'🐞',c:'#e74c3c',s:2,spd:1.2,size:38,hp:1},
+  {e:'🦋',c:'#9b59b6',s:4,spd:1.3,size:42,hp:1},
+  {e:'⭐',c:'#ffd700',s:5,spd:0.9,size:36,hp:1},
 ];
+
 function init(){
   G={
-    st:'p',fr:0,score:0,combo:0,maxCombo:0,
-    bees:[],spawnT:0,spawnI:50,
-    time:60,best:parseInt(localStorage.getItem('sbBest'))||0,
-    hitFX:[],
+    st:'p',fr:0,timer:60,
+    score:0,combo:0,maxCombo:0,
+    // 炮台
+    gx:W/2,gy:H-40,
+    // 子弹
+    bullets:[],
+    shootCD:0,shootMax:10,
+    // 蜜蜂
+    bees:[],
+    spawnT:0,spawnMax:45,
+    // 特效
+    fx:[],
+    best:parseInt(localStorage.getItem('bb_best')||'0'),
   };
-  $('hud').className='hud on';hideAll();$('hScore').textContent='0';$('hTime').textContent='60';$('hCombo').textContent='0';
+  $('hud').className='hud on';hideAll();
+  $('hS').textContent='0';$('hC').textContent='0';$('hT').textContent='60';
 }
 function hideAll(){['sMenu','sOver'].forEach(function(id){$(id).classList.remove('on')})}
+
+// 音效(用振荡器)
+function beep(freq,vol){
+  try{
+    var ac=new(window.AudioContext||window.webkitAudioContext)();
+    var osc=ac.createOscillator();var g=ac.createGain();
+    osc.connect(g);g.connect(ac.destination);
+    osc.frequency.value=freq;g.gain.value=vol;
+    g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+0.1);
+    osc.start();osc.stop(ac.currentTime+0.1);
+  }catch(e){}
+}
+
 function update(){
   if(!G||G.st!=='p')return;
   var g=G;g.fr++;
+
   // 倒计时
-  if(g.fr%60===0){g.time--;$('hTime').textContent=g.time;
-    if(g.time<=0){g.st='d';showOver();return}}
+  if(g.fr%60===0){
+    g.timer--;$('hT').textContent=g.timer;
+    if(g.timer<=0){g.st='d';showOver();return}
+  }
+
+  // 炮台移动(鼠标)
+  // (鼠标在mousemove中控制)
+
+  // 自动射击(按住鼠标时)
+  if(g.mouseDown&&g.shootCD<=0){
+    g.shootCD=g.shootMax;
+    // 发射子弹
+    g.bullets.push({
+      x:g.gx,y:g.gy-20,
+      vx:(Math.random()-0.5)*0.5,
+      vy:-7-Math.random()*2,
+      life:80,
+    });
+    beep(800,0.08);
+  }
+  if(g.shootCD>0)g.shootCD--;
+
   // 生成蜜蜂
   g.spawnT++;
-  if(g.spawnT>=g.spawnI){
+  if(g.spawnT>=g.spawnMax){
     g.spawnT=0;
-    var typeIdx=Math.random()<0.1?4:(Math.random()<0.2?1:(Math.random()<0.3?2+Math.floor(Math.random()*2):0));
+    var typeIdx=Math.random()<0.08?4:(Math.random()<0.18?1:(Math.random()<0.28?2+Math.floor(Math.random()*2):0));
     var t=BEE_TYPES[typeIdx];
     var side=Math.floor(Math.random()*4);
     var x,y,vx,vy;
-    if(side===0){x=-30;y=50+Math.random()*(H-100);vx=t.spd*(0.5+Math.random()*0.5);vy=(Math.random()-0.5)*t.spd*0.5}
-    else if(side===1){x=W+30;y=50+Math.random()*(H-100);vx=-t.spd*(0.5+Math.random()*0.5);vy=(Math.random()-0.5)*t.spd*0.5}
-    else if(side===2){x=50+Math.random()*(W-100);y=-30;vx=(Math.random()-0.5)*t.spd;vy=t.spd*(0.5+Math.random()*0.5)}
-    else{x=50+Math.random()*(W-100);y=H+30;vx=(Math.random()-0.5)*t.spd;vy=-t.spd*(0.5+Math.random()*0.5)}
+    if(side===0){x=-40;y=40+Math.random()*(H-160);vx=t.spd*(0.5+Math.random()*0.5);vy=(Math.random()-0.5)*t.spd*0.4}
+    else if(side===1){x=W+40;y=40+Math.random()*(H-160);vx=-t.spd*(0.5+Math.random()*0.5);vy=(Math.random()-0.5)*t.spd*0.4}
+    else if(side===2){x=40+Math.random()*(W-80);y=-40;vx=(Math.random()-0.5)*t.spd*0.6;vy=t.spd*(0.5+Math.random()*0.5)}
+    else{x=40+Math.random()*(W-80);y=H+40;vx=(Math.random()-0.5)*t.spd*0.6;vy=-t.spd*(0.5+Math.random()*0.5)}
     g.bees.push({
       x:x,y:y,vx:vx,vy:vy,type:t,
       hp:t.hp,size:t.size,wobble:Math.random()*6.28,
       alive:true,timer:0,
     });
   }
+
+  // 更新子弹
+  for(var i=g.bullets.length-1;i>=0;i--){
+    var b=g.bullets[i];
+    b.x+=b.vx;b.y+=b.vy;b.life--;
+    if(b.y<-20||b.life<=0||b.x<-20||b.x>W+20){g.bullets.splice(i,1);continue}
+    // 子弹打中蜜蜂
+    for(var j=g.bees.length-1;j>=0;j--){
+      var bee=g.bees[j];
+      if(!bee.alive)continue;
+      var dx=b.x-bee.x,dy=b.y-bee.y;
+      if(dx*dx+dy*dy<(bee.size*1.2)*(bee.size*1.2)){
+        bee.hp--;
+        if(bee.hp<=0){
+          bee.alive=false;
+          g.combo++;
+          if(g.combo>g.maxCombo)g.maxCombo=g.combo;
+          var comboMul=Math.min(3,1+Math.floor(g.combo/8)*0.5);
+          var pts=Math.floor(bee.type.s*10*comboMul);
+          g.score+=pts;
+          $('hS').textContent=g.score;
+          $('hC').textContent=g.combo;
+          // 特效
+          g.fx.push({x:bee.x,y:bee.y,text:'+'+pts,life:25,
+            c:bee.type.e==='⭐'?'#ffd700':'#ffd43b',vy:-1.5});
+          for(var k=0;k<8;k++){var a=k*0.8;g.fx.push({x:bee.x,y:bee.y,dx:Math.cos(a)*5,dy:Math.sin(a)*4-1,c:'#ffd43b',life:10})}
+          beep(1200,0.06);
+        }else{
+          beep(600,0.04);
+          g.fx.push({x:bee.x,y:bee.y,text:'💥',life:10,c:'#fff',vy:-1});
+        }
+        g.bullets.splice(i,1);break;
+      }
+    }
+  }
+
   // 更新蜜蜂
   for(var i=g.bees.length-1;i>=0;i--){
     var b=g.bees[i];
     if(!b.alive){g.bees.splice(i,1);continue}
-    b.timer++;
-    b.wobble+=0.05;
-    b.x+=b.vx+Math.sin(b.wobble)*0.5;
-    b.y+=b.vy+Math.cos(b.wobble*0.7)*0.5;
-    // 边界反弹
-    if(b.x<-50||b.x>W+50||b.y<-50||b.y>H+50){
-      // 从另一边出来
-      if(b.x<-50)b.x=W+40;if(b.x>W+50)b.x=-40;
-      if(b.y<-50)b.y=H+40;if(b.y>H+50)b.y=-40;
+    b.timer++;b.wobble+=0.04;
+    b.x+=b.vx+Math.sin(b.wobble)*0.4;
+    b.y+=b.vy+Math.cos(b.wobble*0.7)*0.4;
+    if(b.x<-60||b.x>W+60||b.y<-60||b.y>H+60){
+      if(b.x<-60)b.x=W+50;if(b.x>W+60)b.x=-50;
+      if(b.y<-60)b.y=H+50;if(b.y>H+60)b.y=-50;
     }
   }
-  // 特效
-  for(var i=g.hitFX.length-1;i>=0;i--){
-    g.hitFX[i].life--;if(g.hitFX[i].life<=0)g.hitFX.splice(i,1)
+
+  // 特效更新
+  for(var i=g.fx.length-1;i>=0;i--){
+    var f=g.fx[i];f.life--;
+    if(f.text!==undefined&&f.vy!==undefined)f.y+=f.vy;
+    if(f.dx!==undefined){f.x+=f.dx;f.y+=f.dy;f.dy+=0.2}
+    if(f.life<=0)g.fx.splice(i,1);
   }
-  $('hScore').textContent=g.score;
-  $('hCombo').textContent=g.combo;
 }
-function showOver(){
-  hideAll();$('hud').className='hud';
-  var g=G;
-  if(g.score>g.best){g.best=g.score;localStorage.setItem('sbBest',g.score)}
-  $('scoreInfo').innerHTML=
-    '得分: <b style="color:#ffd43b">'+g.score+'</b><br>'+
-    '最高连击: <b style="color:#44b4ff">'+g.maxCombo+'</b><br>'+
-    '历史最高: <b style="color:#ff6b35">'+(g.best)+'</b>';
-  $('sOver').className='ov on';
-}
+
 function render(){
-  cx.clearRect(0,0,W,H);if(!G)return;
-  var g=G;
-  // 天空渐变
-  var gr=cx.createLinearGradient(0,0,0,H);
-  gr.addColorStop(0,'#87CEEB');gr.addColorStop(0.6,'#b8e6b8');gr.addColorStop(1,'#90be6d');
+  if(!G)return;var g=G;
+  cx.clearRect(0,0,W,H);
+
+  // 深空背景
+  var gr=cx.createRadialGradient(W/2,0,0,W/2,0,H);
+  gr.addColorStop(0,'#1a1a3e');gr.addColorStop(0.5,'#0f0c29');gr.addColorStop(1,'#0a0a1a');
   cx.fillStyle=gr;cx.fillRect(0,0,W,H);
-  // 云朵
-  for(var i=0;i<5;i++){var cx2=((i*237+50)%W),cy=((i*157+20)%(H*0.4));
-    cx.fillStyle='rgba(255,255,255,'+(0.3+Math.sin(g.fr*0.01+i)*0.1)+')';
-    cx.beginPath();cx.ellipse(cx2,cy,60+Math.sin(i)*20,20+Math.cos(i)*8,0,0,Math.PI*2);cx.fill()
-    cx.beginPath();cx.ellipse(cx2+30,cy-8,40+Math.sin(i+1)*15,18,0,0,Math.PI*2);cx.fill()
-    cx.beginPath();cx.ellipse(cx2-25,cy+3,35+Math.cos(i)*12,15,0,0,Math.PI*2);cx.fill()
+
+  // 星星
+  for(var i=0;i<30;i++){
+    var sx=(i*157+43)%W,sy=(i*97+11)%(H*0.6);
+    cx.fillStyle='rgba(255,255,255,'+(0.15+0.2*Math.sin(g.fr*0.02+i*2.1))+')';
+    cx.beginPath();cx.arc(sx,sy,1,0,Math.PI*2);cx.fill();
   }
-  // 草地
-  cx.fillStyle='#7ec850';
-  cx.beginPath();cx.moveTo(0,H);cx.quadraticCurveTo(W*0.25,H-8,W*0.5,H-3);
-  cx.quadraticCurveTo(W*0.75,H+4,W,H-5);cx.lineTo(W,H);cx.closePath();cx.fill();
+
+  // 地面
+  cx.fillStyle='#1a3a1a';cx.fillRect(0,H-30,W,30);
+  cx.fillStyle='#2a5a2a';cx.fillRect(0,H-30,W,3);
+
   // 画蜜蜂
   for(var i=0;i<g.bees.length;i++){
     var b=g.bees[i];
     cx.save();cx.translate(b.x,b.y);
-    // 半透明瞄准圈(方便点击)
-    cx.fillStyle='rgba(255,255,255,0.08)';cx.beginPath();cx.arc(0,0,b.size*1.2,0,Math.PI*2);cx.fill();
-    cx.strokeStyle='rgba(255,255,255,0.06)';cx.lineWidth=1;cx.beginPath();cx.arc(0,0,b.size*1.8,0,Math.PI*2);cx.stroke();
-    // 被击中闪白
-    if(b.hp<=0){
-      cx.globalAlpha=0.5;
-      cx.fillStyle='#fff';cx.beginPath();cx.arc(0,0,b.size*0.8,0,Math.PI*2);cx.fill();
-      cx.globalAlpha=1;
-    }
+    // 瞄准圈
+    cx.fillStyle='rgba(255,255,255,0.04)';cx.beginPath();cx.arc(0,0,b.size*1.5,0,Math.PI*2);cx.fill();
     cx.font=b.size+'px Arial';cx.textAlign='center';cx.textBaseline='middle';
+    // 发光
+    cx.shadowColor=b.type.c;cx.shadowBlur=10;
     cx.fillText(b.type.e,0,0);
-    // 蜜蜂翅膀扇动
-    if(b.type.e==='🐝'){
-      cx.fillStyle='rgba(255,255,255,0.3)';
-      var wf=Math.sin(b.timer*0.3)*5;
-      cx.beginPath();cx.ellipse(-8,-6-wf,6,3,0.3,0,Math.PI*2);cx.fill();
-      cx.beginPath();cx.ellipse(8,-6-wf,6,3,-0.3,0,Math.PI*2);cx.fill();
-    }
-    // 血量条(大黄蜂)
+    cx.shadowBlur=0;
+    // 血条
     if(b.type.hp>1&&b.hp>0){
-      cx.fillStyle='#333';cx.fillRect(-12,-b.size/2-8,24,3);
-      cx.fillStyle='#e74c3c';cx.fillRect(-12,-b.size/2-8,24*(b.hp/b.type.hp),3);
+      cx.fillStyle='rgba(0,0,0,0.5)';cx.fillRect(-14,-b.size/2-6,28,4);
+      cx.fillStyle='#e74c3c';cx.fillRect(-14,-b.size/2-6,28*(b.hp/b.type.hp),4);
     }
     cx.restore();
   }
-  // 点击特效
-  for(var i=0;i<g.hitFX.length;i++){
-    var fx=g.hitFX[i],a=fx.life/12;
-    cx.globalAlpha=a;
-    cx.fillStyle=fx.c;cx.strokeStyle='#fff';cx.lineWidth=2;
-    cx.beginPath();cx.arc(fx.x,fx.y,fx.r*(1-a),0,Math.PI*2);cx.fill();cx.stroke();
-    cx.globalAlpha=1;
+
+  // 画子弹 - 发光弹丸
+  for(var i=0;i<g.bullets.length;i++){
+    var b=g.bullets[i];
+    cx.fillStyle='#ffd43b';cx.shadowColor='#ffd43b';cx.shadowBlur=12;
+    cx.beginPath();cx.arc(b.x,b.y,4,0,Math.PI*2);cx.fill();
+    cx.fillStyle='#fff';cx.beginPath();cx.arc(b.x,b.y,2,0,Math.PI*2);cx.fill();
+    cx.shadowBlur=0;
+    // 拖尾
+    cx.fillStyle='rgba(255,212,59,0.3)';cx.beginPath();cx.arc(b.x-b.vx*0.5,b.y-b.vy*0.5,3,0,Math.PI*2);cx.fill();
   }
-  // 草地
-  for(var gs=0;gs<12;gs++){var gx=gs/12*W,gh=5+Math.sin(gs*2+g.fr*0.02)*3;
-    cx.fillStyle='#6ab040';cx.fillRect(gx,H-gh,12,gh)}
-}
-// 点击打蜜蜂
-ca.addEventListener('click',function(e){
-  if(!G||G.st!=='p')return;
-  var rect=ca.getBoundingClientRect();
-  var mx=(e.clientX-rect.left)/rect.width*W,my=(e.clientY-rect.top)/rect.height*H;
-  var hit=false;
-  for(var i=G.bees.length-1;i>=0;i--){
-    var b=G.bees[i];
-    var dx=mx-b.x,dy=my-b.y;
-    if(dx*dx+dy*dy<(b.size*2)*(b.size*2)){
-      b.hp--;
-      if(b.hp<=0){
-        b.alive=false;
-        var pts=Math.floor(b.type.s*(1+G.combo*0.1));
-        G.score+=pts;
-        G.combo++;
-        if(G.combo>G.maxCombo)G.maxCombo=G.combo;
-        // 加分弹出
-        showPop(mx,my,'+'+pts);
-        // 特效
-        G.hitFX.push({x:mx,y:my,r:b.size,c:b.type.c,life:12});
-        hit=true;
-      }
-      break;
+
+  // 画炮台
+  var gx=g.gx;
+  // 底座
+  cx.fillStyle='#555';cx.fillRect(gx-18,H-30,36,8);
+  cx.fillStyle='#888';cx.fillRect(gx-12,H-22,24,4);
+  // 炮管
+  cx.fillStyle='#44b4ff';cx.shadowColor='#44b4ff';cx.shadowBlur=8;
+  cx.fillRect(gx-4,H-46,8,30);
+  cx.shadowBlur=0;
+  // 炮口闪光(发射时)
+  if(g.shootCD>g.shootMax-3){
+    cx.fillStyle='rgba(255,212,59,0.6)';cx.beginPath();cx.arc(gx,H-50,8+Math.random()*4,0,Math.PI*2);cx.fill();
+  }
+  // 炮身装饰
+  cx.fillStyle='#ff6b35';cx.fillRect(gx-8,H-38,16,8);
+  cx.fillStyle='#44b4ff';cx.font='16px Arial';cx.textAlign='center';cx.textBaseline='bottom';
+  cx.fillText('🔫',gx,H-32);
+
+  // 特效
+  for(var i=0;i<g.fx.length;i++){
+    var f=g.fx[i];
+    if(f.text!==undefined){
+      cx.globalAlpha=Math.min(1,f.life/15);
+      cx.fillStyle=f.c;cx.font='bold 18px Arial';cx.textAlign='center';cx.textBaseline='middle';
+      cx.shadowColor=f.c;cx.shadowBlur=6;
+      cx.fillText(f.text,f.x,f.y);
+      cx.shadowBlur=0;cx.globalAlpha=1;
+    }else{
+      cx.globalAlpha=f.life/10;
+      cx.fillStyle=f.c;cx.beginPath();cx.arc(f.x,f.y,3,0,Math.PI*2);cx.fill();
+      cx.globalAlpha=1;
     }
   }
-  if(!hit){G.combo=0}
-});
-function showPop(x,y,text){
-  var el=document.createElement('div');el.className='pop';
-  el.textContent=text;
-  el.style.left=x+'px';el.style.top=y+'px';
-  document.body.appendChild(el);
-  setTimeout(function(){el.remove()},600);
 }
+
+function showOver(){
+  hideAll();$('hud').className='hud';
+  var g=G;
+  if(g.score>g.best){g.best=g.score;try{localStorage.setItem('bb_best',g.score)}catch(e){}}
+  $('resText').innerHTML=
+    '&#127775; 得分: <b style="color:#ffd43b;font-size:24px">'+g.score+'</b><br>'+
+    '&#128293; 最高连击: <b style="color:#ff6b35">'+g.maxCombo+'</b>x<br>'+
+    '&#127942; 历史最高: <b style="color:#44b4ff;font-size:20px">'+g.best+'</b>';
+  $('sOver').className='ov on';
+}
+
+// 鼠标控制 - 炮台移动 + 射击
+var mouseDown=false;
+ca.addEventListener('mousemove',function(e){
+  if(G&&G.st==='p'){
+    var rect=ca.getBoundingClientRect();
+    G.gx=(e.clientX-rect.left)/rect.width*W;
+  }
+});
+ca.addEventListener('mousedown',function(e){
+  if(G&&G.st==='p'){mouseDown=true;G.mouseDown=true}
+});
+ca.addEventListener('mouseup',function(e){
+  mouseDown=false;if(G)G.mouseDown=false;
+});
+
 // 按钮
-$('bStart').onclick=function(){init()};
-$('bAgain').onclick=function(){init()};
-$('bMenu').onclick=function(){hideAll();$('hud').className='hud';G=null;$('sMenu').className='ov on'};
-function loop(){try{update();render()}catch(e){try{cx.fillStyle='#fff';cx.font='12px Arial';cx.fillText('ERR:'+e.message,10,30)}catch(e2){}}requestAnimationFrame(loop)}
+$('bGo').onclick=function(){init()};
+$('bRetry').onclick=function(){init()};
+$('bMenu').onclick=function(){hideAll();$('hud').className='hud';G=null;$('sMenu').className='ov on';};
+
+function loop(){
+  try{update();render()}catch(e){try{cx.fillStyle='#fff';cx.font='12px Arial';cx.fillText('err:'+e.message,10,20)}catch(e2){}}
+  requestAnimationFrame(loop)
+}
 requestAnimationFrame(loop);
+})();
 </script>
 </body>
 </html>
