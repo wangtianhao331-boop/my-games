@@ -2,58 +2,43 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>都江堰嘉祥十周年设计</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-  background:#f5f0eb;font-family:'Microsoft YaHei','PingFang SC',sans-serif;
+  background:#f0ece6;font-family:'Microsoft YaHei','PingFang SC',sans-serif;
   display:flex;flex-direction:column;align-items:center;padding:30px 16px;
 }
-.page{
-  max-width:780px;width:100%;background:#fff;border-radius:20px;
-  box-shadow:0 8px 40px rgba(0,0,0,0.06);padding:36px 32px;margin-bottom:24px;
-}
-.stitle{
-  text-align:center;padding-bottom:10px;margin-bottom:18px;
-}
-.stitle h1{font-size:28px;color:#C41E24;letter-spacing:6px;font-weight:900}
-.stitle p{font-size:11px;color:#aaa;letter-spacing:2px;margin-top:2px}
+.page{max-width:780px;width:100%;background:#fff;border-radius:20px;box-shadow:0 8px 40px rgba(0,0,0,0.06);padding:36px 32px;margin-bottom:24px}
+.stitle{text-align:center;padding-bottom:10px;margin-bottom:18px}
+.stitle h1{font-size:26px;color:#C41E24;letter-spacing:6px;font-weight:900}
+.stitle p{font-size:11px;color:#aaa;letter-spacing:2px;margin-top:4px}
+.tags{display:flex;justify-content:center;gap:6px;margin:8px 0;flex-wrap:wrap}
+.tag{padding:3px 16px;border-radius:20px;font-size:10px;font-weight:bold;color:#fff}
+.t1{background:#C41E24} .t2{background:#C59B3C} .t3{background:#4ab8d4} .t4{background:#4a9a5a}
 
-/* LOGO */
+/* LOGO展示 */
 .logo-area{display:flex;justify-content:center;padding:20px 0}
-.lbox{width:360px;height:360px}
+.lbox{width:340px;height:340px}
 .lbox svg{width:100%;height:100%}
 
 /* 吉祥物 */
-.m-area{
-  display:flex;justify-content:center;gap:40px;
-  padding:20px 0;flex-wrap:wrap;
-}
-.m-item{text-align:center;width:180px}
-.m-item .m-img{width:180px;height:220px;margin:0 auto}
-.m-item .m-img svg{width:100%;height:100%}
-.m-item .mn{font-size:20px;font-weight:bold;color:#C41E24;margin-top:6px;letter-spacing:2px}
-.m-item .mt{font-size:10px;color:#aaa}
-.m-item .md{font-size:11px;color:#666;line-height:1.5;margin-top:4px;padding:0 4px}
-
-.tags{display:flex;justify-content:center;gap:6px;margin:10px 0;flex-wrap:wrap}
-.tag{padding:3px 14px;border-radius:20px;font-size:10px;font-weight:bold;color:#fff}
-.t1{background:#C41E24}
-.t2{background:#C59B3C}
-.t3{background:#3a9aba}
-.t4{background:#4a9a5a}
+.m-area{display:flex;justify-content:center;gap:50px;padding:20px 0;flex-wrap:wrap}
+.mc{text-align:center;width:200px}
+.mc .mv{width:200px;height:240px;margin:0 auto}
+.mc .mv svg{width:100%;height:100%}
+.mc .mn{font-size:20px;font-weight:bold;color:#C41E24;margin-top:8px;letter-spacing:2px}
+.mc .mt{font-size:10px;color:#aaa}
+.mc .md{font-size:11px;color:#666;line-height:1.6;margin-top:4px}
 
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
-.g3{background:#faf8f5;border-radius:8px;padding:10px 12px;text-align:center}
-.g3 .e{font-size:18px}
+.g3{background:#faf8f5;border-radius:8px;padding:10px;text-align:center}
+.g3 .e{font-size:16px}
 .g3 h4{font-size:11px;color:#C41E24}
-.g3 p{font-size:10px;color:#666;line-height:1.4}
+.g3 p{font-size:9px;color:#666;line-height:1.4}
 
-.sb{
-  border:2px solid #C41E24;border-radius:14px;
-  padding:18px 22px;background:#fff;margin-top:10px;
-}
+.sb{border:2px dashed #C41E24;border-radius:14px;padding:18px 22px;background:#fefaf8;margin-top:10px}
 .sb p{font-size:13px;color:#444;line-height:2}
 .sb .big{font-size:16px;color:#C41E24;font-weight:bold;text-align:center}
 .sb .h{color:#C41E24;font-weight:bold}
@@ -61,328 +46,294 @@ body{
 .footer{text-align:center;font-size:10px;color:#bbb;letter-spacing:2px;margin-top:8px}
 
 @media(max-width:550px){
-  .lbox{width:290px;height:290px}
+  .lbox{width:280px;height:280px}
   .grid3{grid-template-columns:1fr}
   .page{padding:20px 14px}
-  .m-item{width:150px}
-  .m-item .m-img{width:150px;height:185px}
+  .mc{width:160px}
+  .mc .mv{width:160px;height:195px}
 }
 </style>
 </head>
 <body>
 
 <!-- ============================================================ -->
-<!-- LOGO 新版：嘉祥盾牌为主，不识字也认得 -->
+<!-- LOGO 最终版：干净、大气 -->
 <!-- ============================================================ -->
 <div class="page">
   <div class="stitle">
     <h1>都江堰嘉祥 · 十周年</h1>
-    <p>盾牌一出手 · 就知是嘉祥</p>
+    <p>JIAXIANG · 拾光都江</p>
   </div>
-
   <div class="tags">
     <span class="tag t1">嘉祥红</span>
     <span class="tag t2">银杏金</span>
     <span class="tag t3">岷江蓝</span>
   </div>
-
   <div class="logo-area">
     <div class="lbox">
-      <svg viewBox="0 0 360 360" width="360" height="360">
+      <svg viewBox="0 0 340 340" width="340" height="340">
         <defs>
-          <linearGradient id="r1" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id="rd" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#C41E24"/>
             <stop offset="100%" stop-color="#9B161A"/>
           </linearGradient>
-          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <linearGradient id="gd" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#E8C84A"/>
+            <stop offset="50%" stop-color="#D4AA50"/>
             <stop offset="100%" stop-color="#C59B3C"/>
           </linearGradient>
         </defs>
+        <circle cx="170" cy="155" r="145" fill="rgba(196,30,36,0.02)"/>
 
-        <!-- 背景圆 -->
-        <circle cx="180" cy="165" r="150" fill="rgba(196,30,36,0.02)"/>
+        <!-- 嘉祥盾牌（主视觉）-->
+        <path d="M 170 35 L 285 90 L 285 190 Q 285 265 170 320 Q 55 265 55 190 L 55 90 Z" 
+              fill="url(#rd)" stroke="url(#gd)" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M 170 42 L 278 94 L 278 186 Q 278 258 170 310 Q 62 258 62 186 L 62 94 Z" 
+              fill="rgba(255,255,255,0.03)"/>
 
-        <!-- ===== 嘉祥盾牌（大大的，一眼认出）===== -->
-        <path d="M 180 40 
-                 L 295 95 
-                 L 295 195 
-                 Q 295 270 180 325 
-                 Q 65 270 65 195 
-                 L 65 95 Z" 
-              fill="url(#r1)" stroke="url(#g1)" stroke-width="4" stroke-linejoin="round"/>
+        <!-- "10" -->
+        <rect x="133" y="95" width="22" height="110" rx="5" fill="#fff"/>
+        <polygon points="144,78 160,100 128,100" fill="#fff"/>
+        <rect x="137" y="98" width="5" height="104" rx="2" fill="rgba(255,255,255,0.25)"/>
 
-        <!-- 盾牌高光 -->
-        <path d="M 180 48 L 285 99 L 285 191 Q 285 262 180 315 Q 75 262 75 191 L 75 99 Z" 
-              fill="rgba(255,255,255,0.04)"/>
+        <circle cx="230" cy="150" r="40" fill="none" stroke="#fff" stroke-width="17"/>
+        <circle cx="230" cy="150" r="26" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
 
-        <!-- ===== 盾牌中央：金色"嘉祥"（最大最醒目）===== -->
-        <rect x="120" y="220" width="120" height="38" rx="6" fill="url(#g1)"/>
-        <text x="180" y="247" font-family="SimHei,Microsoft YaHei,sans-serif" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle" letter-spacing="6">嘉祥</text>
+        <!-- 水纹 -->
+        <path d="M 208 138 Q 218 134 230 138 Q 242 142 252 138" fill="none" stroke="#4ab8d4" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+        <path d="M 208 162 Q 218 158 230 162 Q 242 166 252 162" fill="none" stroke="#4ab8d4" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
 
-        <!-- ===== 白色"10"在盾牌上部 ===== -->
-        <!-- "1" -->
-        <rect x="135" y="100" width="24" height="105" rx="5" fill="#fff"/>
-        <polygon points="147,85 163,105 131,105" fill="#fff"/>
-        <rect x="139" y="103" width="6" height="99" rx="2" fill="rgba(255,255,255,0.3)"/>
-
-        <!-- "0" -->
-        <ellipse cx="232" cy="152" rx="35" ry="42" fill="none" stroke="#fff" stroke-width="18"/>
-        <ellipse cx="232" cy="152" rx="18" ry="25" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="3"/>
-
-        <!-- "0"中的岷江水纹（蓝色细线）-->
-        <path d="M 210 140 Q 220 135 232 140 Q 244 145 254 140" 
-              fill="none" stroke="#3a9aba" stroke-width="1.5" opacity="0.4" stroke-linecap="round"/>
-        <path d="M 210 162 Q 220 158 232 162 Q 244 166 254 162" 
-              fill="none" stroke="#3a9aba" stroke-width="1.5" opacity="0.4" stroke-linecap="round"/>
-
-        <!-- "0" 底部银杏叶 -->
-        <g transform="translate(232,168)">
-          <path d="M 0,-8 C 4,-6 6,-2 5,2 C 4,5 2,7 0,8 C -2,7 -4,5 -5,2 C -6,-2 -4,-6 0,-8 Z" 
-                fill="url(#g1)"/>
+        <!-- 银杏 -->
+        <g transform="translate(230,150)">
+          <path d="M 0,-10 C 4,-8 6,-3 5,2 C 4,6 2,8 0,9 C -2,8 -4,6 -5,2 C -6,-3 -4,-8 0,-10 Z" fill="url(#gd)"/>
         </g>
 
-        <!-- ===== 都江堰小字 ===== -->
-        <text x="180" y="280" font-family="SimSun,STSong,serif" font-size="12" fill="rgba(255,255,255,0.7)" text-anchor="middle" letter-spacing="4">都江堰市嘉祥外国语学校</text>
+        <!-- 校名 -->
+        <text x="170" y="278" font-family="SimHei,Microsoft YaHei,sans-serif" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle" letter-spacing="6">嘉祥</text>
+        <text x="170" y="298" font-family="SimSun,STSong,serif" font-size="10" fill="rgba(255,255,255,0.6)" text-anchor="middle" letter-spacing="3">都江堰市嘉祥外国语学校</text>
 
-        <!-- ===== 底部飘带 ===== -->
-        <path d="M 125 292 Q 180 302 235 292" fill="none" stroke="url(#g1)" stroke-width="1" opacity="0.4"/>
-        <text x="180" y="302" font-family="SimHei,Microsoft YaHei,sans-serif" font-size="8" fill="rgba(255,255,255,0.3)" text-anchor="middle" letter-spacing="2">创中华名校 · 育国际英才</text>
+        <text x="170" y="322" font-family="Arial,sans-serif" font-size="9" fill="rgba(255,255,255,0.35)" text-anchor="middle" letter-spacing="3">2017 — 2027 · 十周年校庆</text>
 
-        <!-- ===== 年份 ===== -->
-        <text x="180" y="322" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="rgba(255,255,255,0.5)" text-anchor="middle" letter-spacing="4">2017 — 2027</text>
-        <text x="180" y="338" font-family="SimSun,STSong,serif" font-size="9" fill="rgba(255,255,255,0.3)" text-anchor="middle" letter-spacing="3">十周年校庆</text>
-
-        <!-- ===== 盾牌两侧的金色装饰线 ===== -->
-        <path d="M 58 140 Q 52 165 58 190" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.25" stroke-linecap="round"/>
-        <path d="M 302 140 Q 308 165 302 190" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.25" stroke-linecap="round"/>
+        <!-- 两侧金线 -->
+        <path d="M 48 140 Q 42 165 48 190" fill="none" stroke="url(#gd)" stroke-width="1.5" opacity="0.2" stroke-linecap="round"/>
+        <path d="M 292 140 Q 298 165 292 190" fill="none" stroke="url(#gd)" stroke-width="1.5" opacity="0.2" stroke-linecap="round"/>
       </svg>
     </div>
   </div>
-
   <div class="grid3">
-    <div class="g3"><div class="e">🛡️</div><h4>嘉祥盾牌</h4><p>嘉祥标志性视觉符号，不用看字也知道是嘉祥</p></div>
-    <div class="g3"><div class="e">🔟</div><h4>白色"10"</h4><p>盾牌上醒目白"10"，十周年一目了然</p></div>
-    <div class="g3"><div class="e">🌊🍂</div><h4>岷江+银杏</h4><p>"0"中的蓝水纹和金色银杏，代表都江堰</p></div>
+    <div class="g3"><div class="e">🛡️</div><h4>嘉祥盾牌</h4><p>嘉祥的视觉标志，不识字也认得</p></div>
+    <div class="g3"><div class="e">🔟</div><h4>白"10"</h4><p>十周年主题，干净醒目</p></div>
+    <div class="g3"><div class="e">🌊🍂</div><h4>水纹+银杏</h4><p>"0"里藏着都江堰</p></div>
   </div>
-
   <div class="footer">盾牌所至 · 嘉祥所在</div>
 </div>
 
 <!-- ============================================================ -->
-<!-- 吉祥物新版：更可爱的熊猫 + 银杏叶（替换水精灵）-->
+<!-- 吉祥物：熊猫嘉嘉 + 水晶晶晶 -->
 <!-- ============================================================ -->
 <div class="page">
   <div class="stitle">
-    <h1>🐼 十周年吉祥物 · 嘉嘉 & 杏杏</h1>
-    <p>熊猫＋银杏 · 都江堰的宝贝</p>
+    <h1>🐼 十周年吉祥物 · 嘉嘉 & 晶晶</h1>
+    <p>熊猫＋水晶 · 都江堰的山与水</p>
   </div>
-
   <div class="tags">
     <span class="tag t1">嘉祥红</span>
     <span class="tag t2">银杏金</span>
-    <span class="tag t4">竹林绿</span>
+    <span class="tag t3">水晶蓝</span>
   </div>
-
   <div class="m-area">
-    <!-- 嘉嘉（熊猫）-->
-    <div class="m-item">
-      <div class="m-img">
-        <svg viewBox="0 0 180 220" width="180" height="220">
+    <!-- 嘉嘉 - 熊猫（精修版）-->
+    <div class="mc">
+      <div class="mv">
+        <svg viewBox="0 0 200 240" width="200" height="240">
           <!-- 身体 -->
-          <ellipse cx="90" cy="150" rx="46" ry="50" fill="#f5f5f5"/>
-          <ellipse cx="90" cy="150" rx="38" ry="42" fill="#fff"/>
-          <!-- 肚子淡红 -->
-          <ellipse cx="90" cy="156" rx="22" ry="24" fill="rgba(196,30,36,0.03)"/>
+          <ellipse cx="100" cy="165" rx="50" ry="55" fill="#f5f5f5"/>
+          <ellipse cx="100" cy="165" rx="42" ry="47" fill="#fff"/>
+          <ellipse cx="100" cy="172" rx="24" ry="26" fill="rgba(196,30,36,0.03)"/>
 
-          <!-- 脚 -->
-          <ellipse cx="64" cy="198" rx="16" ry="8" fill="#333"/>
-          <ellipse cx="116" cy="198" rx="16" ry="8" fill="#333"/>
+          <!-- 腿 -->
+          <ellipse cx="72" cy="218" rx="17" ry="9" fill="#333"/>
+          <ellipse cx="128" cy="218" rx="17" ry="9" fill="#333"/>
 
-          <!-- 手 -->
-          <ellipse cx="46" cy="158" rx="9" ry="16" fill="#333" transform="rotate(-10,46,158)"/>
-          <!-- 右手举起 -->
-          <ellipse cx="138" cy="142" rx="9" ry="16" fill="#333" transform="rotate(20,138,142)"/>
+          <!-- 左臂 -->
+          <ellipse cx="52" cy="170" rx="10" ry="18" fill="#333" transform="rotate(-12,52,170)"/>
+          <!-- 右臂（招手）-->
+          <ellipse cx="152" cy="155" rx="10" ry="18" fill="#333" transform="rotate(25,152,155)"/>
 
-          <!-- 头 -->
-          <circle cx="90" cy="82" r="46" fill="#f5f5f5"/>
-          <circle cx="90" cy="82" r="42" fill="#fff"/>
+          <!-- 头（加大）-->
+          <circle cx="100" cy="88" r="52" fill="#f5f5f5"/>
+          <circle cx="100" cy="88" r="48" fill="#fff"/>
 
-          <!-- 耳 -->
-          <circle cx="52" cy="48" r="13" fill="#333"/>
-          <circle cx="54" cy="50" r="7" fill="#555"/>
-          <circle cx="128" cy="48" r="13" fill="#333"/>
-          <circle cx="126" cy="50" r="7" fill="#555"/>
+          <!-- 耳朵 -->
+          <circle cx="56" cy="48" r="15" fill="#333"/>
+          <circle cx="58" cy="50" r="8" fill="#555"/>
+          <circle cx="144" cy="48" r="15" fill="#333"/>
+          <circle cx="142" cy="50" r="8" fill="#555"/>
 
-          <!-- 眼圈 -->
-          <ellipse cx="72" cy="80" rx="15" ry="11" fill="#333" transform="rotate(-6,72,80)"/>
-          <ellipse cx="74" cy="78" rx="9" ry="7" fill="#444" transform="rotate(-6,74,78)"/>
-          <ellipse cx="108" cy="80" rx="15" ry="11" fill="#333" transform="rotate(6,108,80)"/>
-          <ellipse cx="106" cy="78" rx="9" ry="7" fill="#444" transform="rotate(6,106,78)"/>
+          <!-- 眼圈（加大）-->
+          <ellipse cx="80" cy="86" rx="17" ry="13" fill="#333" transform="rotate(-8,80,86)"/>
+          <ellipse cx="82" cy="84" rx="11" ry="9" fill="#444" transform="rotate(-8,82,84)"/>
+          <ellipse cx="120" cy="86" rx="17" ry="13" fill="#333" transform="rotate(8,120,86)"/>
+          <ellipse cx="118" cy="84" rx="11" ry="9" fill="#444" transform="rotate(8,118,84)"/>
 
-          <!-- 眼睛 -->
-          <circle cx="74" cy="78" r="5.5" fill="#fff"/>
-          <circle cx="74" cy="77" r="3" fill="#222"/>
-          <circle cx="72" cy="75" r="1.2" fill="#fff"/>
-          <circle cx="106" cy="78" r="5.5" fill="#fff"/>
-          <circle cx="106" cy="77" r="3" fill="#222"/>
-          <circle cx="104" cy="75" r="1.2" fill="#fff"/>
+          <!-- 眼睛（大眼萌）-->
+          <circle cx="82" cy="84" r="7" fill="#fff"/>
+          <circle cx="82" cy="83" r="4" fill="#222"/>
+          <circle cx="80" cy="81" r="1.5" fill="#fff"/>
+          <circle cx="118" cy="84" r="7" fill="#fff"/>
+          <circle cx="118" cy="83" r="4" fill="#222"/>
+          <circle cx="116" cy="81" r="1.5" fill="#fff"/>
 
           <!-- 鼻子 -->
-          <ellipse cx="90" cy="88" rx="3" ry="2" fill="#555"/>
+          <ellipse cx="100" cy="96" rx="3.5" ry="2.5" fill="#555"/>
 
-          <!-- 笑 -->
-          <path d="M 83 93 Q 90 99 97 93" fill="none" stroke="#777" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- 微笑 -->
+          <path d="M 91 102 Q 100 110 109 102" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round"/>
 
           <!-- 腮红 -->
-          <ellipse cx="63" cy="90" rx="6" ry="3.5" fill="rgba(196,30,36,0.08)"/>
-          <ellipse cx="117" cy="90" rx="6" ry="3.5" fill="rgba(196,30,36,0.08)"/>
+          <ellipse cx="68" cy="98" rx="7" ry="4" fill="rgba(196,30,36,0.08)"/>
+          <ellipse cx="132" cy="98" rx="7" ry="4" fill="rgba(196,30,36,0.08)"/>
 
-          <!-- 红围巾 -->
-          <path d="M 70 103 Q 90 109 110 103 L 107 111 Q 90 115 73 111 Z" fill="#C41E24"/>
-          <path d="M 85 109 L 82 122 Q 90 125 98 122 L 95 109" fill="#C41E24"/>
-          <text x="90" y="110" font-family="Arial" font-size="7" font-weight="bold" fill="#FFD700" text-anchor="middle">10</text>
+          <!-- 红领巾/围巾 -->
+          <path d="M 76 113 Q 100 120 124 113 L 120 123 Q 100 128 80 123 Z" fill="#C41E24"/>
+          <path d="M 94 119 L 90 136 Q 100 140 110 136 L 106 119" fill="#C41E24"/>
+          <text x="100" y="122" font-family="Arial" font-size="9" font-weight="bold" fill="#FFD700" text-anchor="middle">10</text>
 
-          <!-- 头顶银杏 -->
-          <g transform="translate(90,40)">
-            <path d="M 0,-9 C 4,-7 5,-2 4,2 C 3,5 1,6 0,7 C -1,6 -3,5 -4,2 C -5,-2 -4,-7 0,-9 Z" fill="#C59B3C"/>
-            <line x1="0" y1="-7" x2="0" y2="6" stroke="#A07D28" stroke-width="0.5" opacity="0.5"/>
+          <!-- 头顶小银杏 -->
+          <g transform="translate(100,42)">
+            <path d="M 0,-10 C 5,-8 7,-3 6,2 C 5,6 3,8 0,9 C -3,8 -5,6 -6,2 C -7,-3 -5,-8 0,-10 Z" fill="#C59B3C"/>
+            <line x1="0" y1="-8" x2="0" y2="8" stroke="#A07D28" stroke-width="0.6" opacity="0.4"/>
           </g>
         </svg>
       </div>
       <div class="mn">🐼 嘉嘉</div>
       <div class="mt">Jiajia · 嘉祥的熊猫宝贝</div>
-      <div class="md">圆滚滚的熊猫宝宝，戴着嘉祥红围巾，头顶银杏叶，憨厚可爱，人见人爱。</div>
+      <div class="md">头大身小、圆滚滚的熊猫宝宝，黑眼圈大眼睛超治愈。戴着嘉祥红围巾，围巾上有个金灿灿的"10"。</div>
     </div>
 
-    <!-- 杏杏（银杏叶）替换水精灵 -->
-    <div class="m-item">
-      <div class="m-img">
-        <svg viewBox="0 0 180 220" width="180" height="220">
+    <!-- 晶晶 - 水晶宝石（替换水精灵）-->
+    <div class="mc">
+      <div class="mv">
+        <svg viewBox="0 0 200 240" width="200" height="240">
           <defs>
-            <linearGradient id="yl" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#F5E6A0"/>
-              <stop offset="40%" stop-color="#E8C84A"/>
-              <stop offset="100%" stop-color="#C59B3C"/>
+            <linearGradient id="c1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#88eeff"/>
+              <stop offset="30%" stop-color="#4ab8d4"/>
+              <stop offset="70%" stop-color="#2d8ab8"/>
+              <stop offset="100%" stop-color="#1a5a7a"/>
+            </linearGradient>
+            <linearGradient id="c2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.4)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
             </linearGradient>
           </defs>
-          <!-- 杏杏 - 银杏叶娃娃 -->
-          <!-- 身体（银杏叶形状）-->
-          <path d="M 90 50 
-                   C 130 70 145 120 140 155 
-                   C 135 185 115 200 90 210 
-                   C 65 200 45 185 40 155 
-                   C 35 120 50 70 90 50 Z" 
-                fill="url(#yl)" stroke="#C59B3C" stroke-width="1"/>
-          <!-- 叶脉 -->
-          <path d="M 90 50 L 90 210" fill="none" stroke="#A07D28" stroke-width="1" opacity="0.2"/>
-          <path d="M 90 80 L 65 65 M 90 80 L 115 65 M 90 110 L 55 95 M 90 110 L 125 95" 
-                fill="none" stroke="#A07D28" stroke-width="0.8" opacity="0.15"/>
 
-          <!-- 身体高光 -->
-          <path d="M 75 90 Q 85 85 90 100" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round"/>
+          <!-- 身体（水晶宝石切割面）-->
+          <path d="M 100 35 
+                   L 155 75 L 160 140 
+                   L 130 200 L 100 220 L 70 200 L 40 140 L 45 75 Z" 
+                fill="url(#c1)"/>
+          <!-- 切割面 -->
+          <path d="M 100 35 L 100 220" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+          <path d="M 45 75 L 130 200" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+          <path d="M 155 75 L 70 200" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
 
-          <!-- 小肚子 -->
-          <ellipse cx="90" cy="165" rx="20" ry="22" fill="rgba(255,255,255,0.15)"/>
+          <!-- 高光 -->
+          <path d="M 55 85 Q 75 70 95 80" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 50 120 L 60 115" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+
+          <!-- 闪亮星星 -->
+          <g transform="translate(60,65)">
+            <polygon points="0,-4 1.2,-1.2 4,-1.2 1.5,0.5 2.5,3.5 0,1.5 -2.5,3.5 -1.5,0.5 -4,-1.2 -1.2,-1.2" fill="rgba(255,255,255,0.3)"/>
+          </g>
+          <g transform="translate(140,110)">
+            <polygon points="0,-3 1,-1 3,-1 1.2,0.5 2,3 0,1.2 -2,3 -1.2,0.5 -3,-1 -1,-1" fill="rgba(255,255,255,0.2)"/>
+          </g>
+
+          <!-- 肚子光晕 -->
+          <ellipse cx="100" cy="180" rx="22" ry="25" fill="rgba(255,255,255,0.08)"/>
 
           <!-- 手 -->
-          <path d="M 42 145 Q 28 140 25 150 Q 28 158 35 155" fill="none" stroke="#C59B3C" stroke-width="7" stroke-linecap="round"/>
-          <path d="M 138 145 Q 152 140 155 150 Q 152 158 145 155" fill="none" stroke="#C59B3C" stroke-width="7" stroke-linecap="round"/>
+          <path d="M 42 130 Q 25 125 22 140 Q 25 150 35 146" fill="none" stroke="#3a9aba" stroke-width="8" stroke-linecap="round"/>
+          <path d="M 158 130 Q 175 125 178 140 Q 175 150 165 146" fill="none" stroke="#3a9aba" stroke-width="8" stroke-linecap="round"/>
 
           <!-- 脚 -->
-          <ellipse cx="68" cy="206" rx="14" ry="6" fill="#B89030"/>
-          <ellipse cx="112" cy="206" rx="14" ry="6" fill="#B89030"/>
+          <ellipse cx="76" cy="218" rx="14" ry="7" fill="#2d7a9a"/>
+          <ellipse cx="124" cy="218" rx="14" ry="7" fill="#2d7a9a"/>
 
-          <!-- 脸 -->
-          <circle cx="90" cy="100" r="28" fill="#F5E6A0"/>
-          <circle cx="90" cy="100" r="25" fill="url(#yl)"/>
+          <!-- 头（圆圆的宝石顶）-->
+          <circle cx="100" cy="70" r="32" fill="url(#c1)"/>
+          <circle cx="100" cy="70" r="29" fill="rgba(255,255,255,0.05)"/>
 
-          <!-- 眼 -->
-          <circle cx="78" cy="95" r="6" fill="#fff"/>
-          <circle cx="78" cy="94" r="3.5" fill="#333"/>
-          <circle cx="76" cy="92" r="1.2" fill="#fff"/>
-          <circle cx="102" cy="95" r="6" fill="#fff"/>
-          <circle cx="102" cy="94" r="3.5" fill="#333"/>
-          <circle cx="100" cy="92" r="1.2" fill="#fff"/>
+          <!-- 头顶水晶尖角 -->
+          <path d="M 100 35 L 106 45 L 94 45 Z" fill="#88eeff" opacity="0.5"/>
 
-          <!-- 笑 -->
-          <path d="M 83 104 Q 90 109 97 104" fill="none" stroke="#8B6A20" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- 眼睛（大眼萌）-->
+          <circle cx="85" cy="66" r="8" fill="#fff"/>
+          <circle cx="85" cy="65" r="4.5" fill="#1a1a2e"/>
+          <circle cx="83" cy="63" r="1.5" fill="#fff"/>
+          <circle cx="115" cy="66" r="8" fill="#fff"/>
+          <circle cx="115" cy="65" r="4.5" fill="#1a1a2e"/>
+          <circle cx="113" cy="63" r="1.5" fill="#fff"/>
+
+          <!-- 微笑 -->
+          <path d="M 89 78 Q 100 86 111 78" fill="none" stroke="#1a5a7a" stroke-width="2" stroke-linecap="round"/>
 
           <!-- 腮红 -->
-          <ellipse cx="68" cy="100" rx="5" ry="3" fill="rgba(196,30,36,0.08)"/>
-          <ellipse cx="112" cy="100" rx="5" ry="3" fill="rgba(196,30,36,0.08)"/>
+          <ellipse cx="72" cy="74" rx="6" ry="3.5" fill="rgba(255,255,255,0.15)"/>
+          <ellipse cx="128" cy="74" rx="6" ry="3.5" fill="rgba(255,255,255,0.15)"/>
 
           <!-- 红围巾 -->
-          <path d="M 72 115 Q 90 120 108 115 L 105 123 Q 90 127 75 123 Z" fill="#C41E24"/>
-          <path d="M 86 119 L 83 132 Q 90 135 97 132 L 94 119" fill="#C41E24"/>
-          <text x="90" y="121" font-family="Arial" font-size="6.5" font-weight="bold" fill="#FFD700" text-anchor="middle">🍂</text>
-
-          <!-- 头顶小银杏 -->
-          <g transform="translate(90,65)">
-            <path d="M 0,-8 C 3,-6 4,-2 3,1 C 2,4 1,5 0,6 C -1,5 -2,4 -3,1 C -4,-2 -3,-6 0,-8 Z" fill="#E8C84A"/>
-          </g>
+          <path d="M 78 92 Q 100 98 122 92 L 119 102 Q 100 106 81 102 Z" fill="#C41E24"/>
+          <path d="M 93 97 L 90 112 Q 100 116 110 112 L 107 97" fill="#C41E24"/>
+          <text x="100" y="101" font-family="Arial" font-size="7" font-weight="bold" fill="#FFD700" text-anchor="middle">✦</text>
         </svg>
       </div>
-      <div class="mn">🍂 杏杏</div>
-      <div class="mt">Xingxing · 都江堰的银杏</div>
-      <div class="md">金灿灿的银杏叶娃娃，都江堰满城银杏的化身。温暖可爱，戴嘉祥红围巾，是嘉嘉最好的朋友。</div>
+      <div class="mn">💎 晶晶</div>
+      <div class="mt">Jingjing · 都江堰的水晶</div>
+      <div class="md">蓝宝石般闪耀的水晶娃娃，像都江堰的碧水一样清澈透亮。身上有切割面，闪闪发光，和嘉嘉是天生一对。</div>
     </div>
   </div>
 
-  <!-- CP说明 -->
   <div style="text-align:center;margin:8px 0;padding:10px;background:#faf8f5;border-radius:10px">
-    <p style="font-size:14px;color:#C41E24;font-weight:bold;letter-spacing:2px">🐼 嘉嘉 + 🍂 杏杏 = 都江堰嘉祥</p>
-    <p style="font-size:12px;color:#666;margin-top:2px">熊猫代表都江堰的自然生态，银杏代表都江堰的人文底蕴。一白一金、一动一静，天生一对。</p>
+    <p style="font-size:14px;color:#C41E24;font-weight:bold;letter-spacing:2px">🐼 嘉嘉（熊猫） + 💎 晶晶（水晶） = 都江堰嘉祥</p>
+    <p style="font-size:12px;color:#666;margin-top:2px">熊猫代表都江堰的自然生态，水晶代表都江堰的水利之清澈。一暖一冷，一柔一亮，天生一对好朋友。</p>
   </div>
 
   <div class="grid3">
-    <div class="g3"><div class="e">✨</div><h4>高颜值CP</h4><p>熊猫白+银杏金，配色温暖治愈，看着就开心</p></div>
-    <div class="g3"><div class="e">🧸</div><h4>适合做周边</h4><p>圆润造型，适合做玩偶、徽章、贴纸、钥匙扣</p></div>
-    <div class="g3"><div class="e">🎯</div><h4>都江堰特色</h4><p>熊猫=四川，银杏=都江堰，独一无二的组合</p></div>
+    <div class="g3"><div class="e">🐼</div><h4>嘉嘉</h4><p>圆滚滚大熊猫，大眼萌，红围巾"10"，治愈系</p></div>
+    <div class="g3"><div class="e">💎</div><h4>晶晶</h4><p>蓝水晶宝石，闪闪切割面，像都江堰的清流</p></div>
+    <div class="g3"><div class="e">✨</div><h4>好做周边</h4><p>造型简洁，玩偶/徽章/贴纸都能做</p></div>
   </div>
-
-  <div class="footer">嘉嘉杏杏 · 十年好朋友</div>
+  <div class="footer">嘉嘉晶晶 · 十年一同伴</div>
 </div>
 
 <!-- ============================================================ -->
 <!-- 投稿模板 -->
 <!-- ============================================================ -->
 <div class="page">
-  <div class="stitle">
-    <h1>📝 投稿模板</h1>
-  </div>
-
+  <div class="stitle"><h1>📝 投稿模板</h1></div>
   <div class="sb" style="margin-bottom:14px">
     <p class="big">🎨 LOGO设计</p>
     <p>
       <b>作品名称：</b>「盾徽十载 · 都江嘉祥」<br>
-      <b>设计者：</b>______________ &nbsp;&nbsp; <b>班级：</b>______________<br><br>
+      <b>设计者：</b>______________ <b>班级：</b>______________<br><br>
       <b>设计理念：</b><br>
-      本LOGO以嘉祥最具辨识度的<span class="h">盾牌造型</span>为主体，<br>
-      确保<span class="h">不看文字也能认出是嘉祥</span>。<br>
-      盾牌中央的白色<span class="h">"10"</span>点明十周年主题，<br>
-      数字"0"中融入<span class="h">岷江水纹</span>与<span class="h">银杏叶</span>，<br>
-      体现都江堰独特的地域文化。<br>
-      整体采用嘉祥红与金色，庄重典雅，<br>
-      适合校庆各类场合使用。
+      以嘉祥最具辨识度的<span class="h">盾牌造型</span>为主体，<br>不看文字也能认出是嘉祥。<br>
+      白色<span class="h">"10"</span>点明十周年，<br>
+      "0"中融入<span class="h">岷江水纹</span>与<span class="h">银杏叶</span>，<br>体现都江堰地域文化。<br>
+      红金配色，庄重典雅。
     </p>
   </div>
-
   <div class="sb">
     <p class="big">🧸 吉祥物设计</p>
     <p>
-      <b>作品名称：</b>「嘉嘉 & 杏杏」<br>
-      <b>设计者：</b>______________ &nbsp;&nbsp; <b>班级：</b>______________<br><br>
+      <b>作品名称：</b>「嘉嘉 & 晶晶」<br>
+      <b>设计者：</b>______________ <b>班级：</b>______________<br><br>
       <b>设计理念：</b><br>
-      <span class="h">🐼 嘉嘉</span> —— 以国宝大熊猫为原型，<br>
-      取名"嘉嘉"即"嘉祥"，圆润可爱，<br>
-      头顶银杏叶，佩戴嘉祥红围巾，<br>
-      围巾上的"10"点明校庆主题。<br>
-      <span class="h">🍂 杏杏</span> —— 以都江堰满城银杏为灵感，<br>
-      金灿灿的银杏叶娃娃，温暖治愈。<br>
-      两个吉祥物一白一金、一动一静，<br>
-      代表都江堰的<span class="h">自然生态与人文底蕴</span>。<br>
-      造型简洁，易于制作各类周边产品。
+      <span class="h">🐼 嘉嘉</span>：以国宝熊猫为原型，<br>大眼圆脸超治愈，嘉祥红围巾配金色"10"。<br><br>
+      <span class="h">💎 晶晶</span>：以都江堰清澈之水为灵感，<br>化作蓝水晶宝石造型，晶莹闪亮。<br><br>
+      熊猫代表自然生态，水晶代表水利文化，<br>一暖一冷，象征着都江堰嘉祥<span class="h">"山水育人"</span>。
     </p>
   </div>
 </div>
