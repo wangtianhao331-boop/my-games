@@ -125,7 +125,7 @@ function render(){
   gr.addColorStop(0,'#87CEEB');gr.addColorStop(0.6,'#b8e6b8');gr.addColorStop(1,'#90be6d');
   cx.fillStyle=gr;cx.fillRect(0,0,W,H);
   // 云朵
-  for(var i=0;i=5;i++){var cx2=((i*237+50)%W),cy=((i*157+20)%(H*0.4));
+  for(var i=0;i<5;i++){var cx2=((i*237+50)%W),cy=((i*157+20)%(H*0.4));
     cx.fillStyle='rgba(255,255,255,'+(0.3+Math.sin(g.fr*0.01+i)*0.1)+')';
     cx.beginPath();cx.ellipse(cx2,cy,60+Math.sin(i)*20,20+Math.cos(i)*8,0,0,Math.PI*2);cx.fill()
     cx.beginPath();cx.ellipse(cx2+30,cy-8,40+Math.sin(i+1)*15,18,0,0,Math.PI*2);cx.fill()
