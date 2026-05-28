@@ -108,22 +108,23 @@ if(e.key==='j'||e.key==='J')aK=true});
 document.addEventListener('keyup',function(e){K[e.key]=false;if(e.key==='j'||e.key==='J')aK=false});
 // 触屏控制：左1/3=左移，右1/3=右移，中间=跳，任何触摸也触发跳跃
 document.addEventListener('touchstart',function(e){
-  e.preventDefault();aK=true;
   if(G&&G.st==='p'){
+    e.preventDefault();
+    aK=true;
     var tx=e.touches[0].clientX/W;
     K['ArrowLeft']=tx<0.35;K['ArrowRight']=tx>0.65;
   }
 });
 document.addEventListener('touchmove',function(e){
-  e.preventDefault();
   if(G&&G.st==='p'){
+    e.preventDefault();
     var tx=e.touches[0].clientX/W;
     K['ArrowLeft']=tx<0.35;K['ArrowRight']=tx>0.65;
   }
 });
 document.addEventListener('touchend',function(e){
-  e.preventDefault();aK=false;
-  K['ArrowLeft']=false;K['ArrowRight']=false;
+  if(G){aK=false;
+  K['ArrowLeft']=false;K['ArrowRight']=false;}
 });
 var G=null,SL=0,GV=0.6,GY=420;
 // 存档
