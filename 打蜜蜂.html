@@ -225,6 +225,9 @@ function render(){
     cx.save();cx.translate(b.x,b.y);
     // 瞄准圈
     cx.fillStyle='rgba(255,255,255,0.04)';cx.beginPath();cx.arc(0,0,b.size*1.5,0,Math.PI*2);cx.fill();
+    // 彩色底色
+    cx.fillStyle=b.type.c+'33';cx.beginPath();cx.arc(0,0,b.size*0.7,0,Math.PI*2);cx.fill();
+    cx.fillStyle=b.type.c+'66';cx.beginPath();cx.arc(0,0,b.size*0.45,0,Math.PI*2);cx.fill();
     cx.font=b.size+'px Arial';cx.textAlign='center';cx.textBaseline='middle';
     // 发光
     cx.shadowColor=b.type.c;cx.shadowBlur=10;
