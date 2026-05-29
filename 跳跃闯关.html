@@ -112,7 +112,7 @@ document.addEventListener('touchstart',function(e){
 document.addEventListener('touchend',function(e){
   if(G&&G.st==='p'){e.preventDefault();aK=false}
 });
-var G=null,SL=0,GV=0.6,GY=420;
+var G=null,SL=0,GV=0.6,GY=420,sv=null;
 // 存档
 function gSV(){try{var r=localStorage.getItem('jpSave3');if(r)return JSON.parse(r)}catch(e){}return{un:0,st:{},co:0,wp:0,eb:0}}
 function sSV(){try{localStorage.setItem('jpSave3',JSON.stringify(sv))}catch(e){}}
@@ -124,7 +124,7 @@ function iG(id){
   G={id:id,l:l,st:'p',fr:0,rs:3.5,gr:0.55,
     x:80,y:420,w:28,h:34,vx:0,vy:0,onG:false,jC:0,
     lv:3,inv:0,cm:0,cx:0,co:[],pl:[],sk:[],ps:[],ft:[],
-    dt:0,ct:0,stT:Date.now(),di:0,lG:900,end:false,boss:null,wpI:sv.wp||0,
+    dt:0,ct:0,stT:Date.now(),di:0,lG:900,end:false,boss:null,wpI:(sv&&sv.wp)||0,
   };
   G.pl=l.p||[];G.sk=l.sp||[];G.co=l.co||[];for(var i=0;i<G.pl.length;i++)G.pl[i].by=G.pl[i].y;
   upWpn();upH();$('hud').className='hud on';
