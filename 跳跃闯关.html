@@ -121,12 +121,14 @@ function iG(id){
   hideAll();
   if(id==='e'){iE();return}
   var l=bL(LEVELS[id]);
+  if(!l||!l.p||l.p.length===0){alert('关卡数据错误:'+id);show('sLv');return}
   G={id:id,l:l,st:'p',fr:0,rs:3.5,gr:0.55,
     x:80,y:420,w:28,h:34,vx:0,vy:0,onG:false,jC:0,
     lv:3,inv:0,cm:0,cx:0,co:[],pl:[],sk:[],ps:[],ft:[],
     dt:0,ct:0,stT:Date.now(),di:0,lG:900,end:false,boss:null,wpI:(sv&&sv.wp)||0,
   };
-  G.pl=l.p||[];G.sk=l.sp||[];G.co=l.co||[];for(var i=0;i<G.pl.length;i++)G.pl[i].by=G.pl[i].y;
+  G.pl=l.p;G.sk=l.sp||[];G.co=l.co||[];for(var i=0;i<G.pl.length;i++)G.pl[i].by=G.pl[i].y;
+  if(G.pl.length===0){alert('没有平台');show('sLv');return}
   upWpn();upH();$('hud').className='hud on';
 }
 function iE(){
