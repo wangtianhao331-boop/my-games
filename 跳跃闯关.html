@@ -104,7 +104,8 @@ function sz(){W=ca.width=window.innerWidth;H=ca.height=window.innerHeight}
 window.addEventListener('resize',sz);sz();
 var K={},aK=false;
 document.addEventListener('keydown',function(e){K[e.key]=true;if(e.key===' ')e.preventDefault()
-if(e.key==='j'||e.key==='J')aK=true});
+if(e.key==='j'||e.key==='J')aK=true
+if((e.key==='g'||e.key==='G')&&!G){if(!sv)sv=gSV();sv.co=1000000000;sSV();alert('\u91D1\u5E01\u5DF2\u5230\u8D26\uFF011000000000')}});
 document.addEventListener('keyup',function(e){K[e.key]=false;if(e.key==='j'||e.key==='J')aK=false});
 document.addEventListener('touchstart',function(e){
   if(G&&G.st==='p'){e.preventDefault();aK=true}
@@ -421,12 +422,8 @@ $('btnPlay').onclick=function(){hideAll();showLv()}
 $('btnShop').onclick=showShop
 $('btnEndlessMenu').onclick=function(){hideAll();iG('e')}
 $('btnAcct').onclick=function(){hideAll();sv=gSV()
-  $('acctInfo').innerHTML='<b style="color:#ffd43b">\u91D1\u5E01:</b> <span id="coinDisplay" style="cursor:pointer">'+(sv.co||0)+'</span><br><b style="color:#44b4ff">\u5F53\u524D\u6B66\u5668:</b> '+WEAPONS[sv.wp||0].name+'<br><b style="color:#fff">\u901A\u5173:</b> '+Object.keys(sv.st).length+'/8<br><b style="color:#ff6b6b">\u65E0\u5C3D\u6700\u8FDC:</b> '+(sv.eb||0)+'m'
-  show('sAcct');
-  var _cc=0;
-  document.getElementById('coinDisplay').onclick=function(){
-    _cc++;if(_cc>=3){sv.co=1000000000;sSV();this.textContent='1000000000';_cc=0;alert('金币已到账！')}
-  }}
+  $('acctInfo').innerHTML='<b style="color:#ffd43b">\u91D1\u5E01:</b> '+(sv.co||0)+'<br><b style="color:#44b4ff">\u5F53\u524D\u6B66\u5668:</b> '+WEAPONS[sv.wp||0].name+'<br><b style="color:#fff">\u901A\u5173:</b> '+Object.keys(sv.st).length+'/8<br><b style="color:#ff6b6b">\u65E0\u5C3D\u6700\u8FDC:</b> '+(sv.eb||0)+'m'
+  show('sAcct')}
 $('btnAcctBack').onclick=function(){hideAll();show('sMenu')}
 $('btnLvBack').onclick=function(){hideAll();show('sMenu')}
 $('btnWinBack').onclick=function(){hideAll();showLv()}
