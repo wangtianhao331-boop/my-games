@@ -216,14 +216,14 @@ function skillAct(f,o,n){
 // 突进技能
 function doRush(f,o,n){
   var sk=n===1?f.s1:f.s2;f.ac=18;f.act='at';
-  f.vx=f.dir*10;f.vy=-1.5;f.hs=8; // 前冲
+  f.vx=f.dir*10;f.vy=0;f.hs=8; // 前冲
   for(var i=0;i<10;i++){var a=Math.random()*6.28;G.ps.push({x:f.x,y:f.y+20,vx:Math.cos(a)*4,vy:Math.sin(a)*3-1,life:10,m:10,c:f.co,r:3})}
   // 突进中碰到对手
   setTimeout(function(){
     if(!G||!f||!o||f.hp<=0||o.hp<=0)return;
     if(Math.abs(f.x-o.x)<(sk.r||4)*25+20&&!o.hs){
       var d=sk.d;if(o.act==='bl'){d=Math.floor(d*0.25);o.bs=8}else o.hs=12
-      o.hp-=d;o.vx=f.dir*5;o.vy=-1.5
+      o.hp-=d;o.vx=f.dir*4;o.vy=0.5
       for(var i=0;i<12;i++){var a=Math.random()*6.28;G.ps.push({x:o.x,y:o.y+20,vx:Math.cos(a)*5,vy:Math.sin(a)*4-1,life:12,m:12,c:'#fff',r:3})}
       G.fx.push({x:o.x,y:o.y+20,l:12})
     }
@@ -240,7 +240,7 @@ function tS(f,o,n){
   if(sk.d<0){f.hp=Math.min(f.mh,f.hp-sk.d);hit=true;d=0}
   else if(Math.abs(f.x-o.x)<(sk.r||60)+20&&!o.hs){
     if(o.act==='bl'){d=Math.floor(d*0.25);o.bs=6}else o.hs=10
-    o.hp-=d;o.vx=f.dir*4;o.vy=-1.5;hit=true
+    o.hp-=d;o.vx=f.dir*3;o.vy=0.5;hit=true
   }
   for(var i=0;i<10;i++){var a=Math.random()*6.28;G.ps.push({x:f.x+f.dir*30,y:f.y+28,vx:Math.cos(a)*3,vy:Math.sin(a)*2-1,life:10,m:10,c:f.co,r:2.5})}
   if(hit){for(var i=0;i<10;i++){var a=Math.random()*6.28;G.ps.push({x:o.x,y:o.y+20,vx:Math.cos(a)*4,vy:Math.sin(a)*3,life:10,m:10,c:'#fff',r:2.5})}
@@ -250,7 +250,7 @@ function tA(f,o){
   f.ac=10;f.act='at'
   if(Math.abs(f.x-o.x)<50&&!o.hs){
     var d=f.at;if(o.act==='bl'){d=Math.floor(d*0.15);o.bs=5}else o.hs=7
-    o.hp-=d;o.vx=f.dir*4;o.vy=-2
+    o.hp-=d;o.vx=f.dir*3;o.vy=0.5
     G.fx.push({x:o.x+f.dir*12,y:o.y+20,l:5})
     for(var i=0;i<3;i++){var a=Math.random()*6.28;G.ps.push({x:o.x+f.dir*12,y:o.y+20,vx:Math.cos(a)*2,vy:Math.sin(a)*2-1,life:5,m:5,c:'#fff',r:2})}
   }
@@ -265,7 +265,7 @@ function uJ(){
     if(Math.abs(p.x-t.x)<26&&Math.abs(p.y-(t.y+22))<35&&!t.hs){
       var d=p.dmg
       if(t.act==='bl'){d=Math.floor(d*0.25);t.bs=6}else t.hs=10
-      t.hp-=d;t.vx=(p.vx>0?1:-1)*4;t.vy=-1.5
+      t.hp-=d;t.vx=(p.vx>0?1:-1)*3;t.vy=0.5
       G.fx.push({x:p.x,y:p.y,l:14})
       for(var j=0;j<16;j++){var a=Math.random()*6.28;G.ps.push({x:p.x,y:p.y,vx:Math.cos(a)*5,vy:Math.sin(a)*4-1,life:14,m:14,c:'#fff',r:3.5})}
       G.pj.splice(i,1)
