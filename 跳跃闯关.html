@@ -273,7 +273,11 @@ function up(){
 }
 function hrt(){
   var p=G;if(!p)return;p.lv--;
-  if(p.lv<=0){p.st='d';p.dt=60}else{p.inv=60;var lY=520;for(var pi=0;pi<p.pl.length;pi++){var pl2=p.pl[pi];if(p.x+p.w/2>pl2.x&&p.x+p.w/2<pl2.x+pl2.w){lY=pl2.y;break}}p.x=80;p.y=lY-p.h-20;p.vy=0}
+  if(p.lv<=0){p.st='d';p.dt=60}else{p.inv=60;var lY=520,dx=Math.min(p.x,500);
+    for(var pi=0;pi<p.pl.length;pi++){var pl2=p.pl[pi];
+      if(dx+p.w/2>pl2.x&&dx+p.w/2<pl2.x+pl2.w){lY=pl2.y;break}}
+    if(lY===520&&p.pl.length>0){var last=p.pl[p.pl.length-1];lY=last.y;dx=last.x+10}
+    p.x=dx;p.y=lY-p.h-20;p.vy=0}
 }
 // ---- 渲染 ----
 function r(){
