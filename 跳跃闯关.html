@@ -104,9 +104,9 @@ function sz(){W=ca.width=window.innerWidth;H=ca.height=window.innerHeight}
 window.addEventListener('resize',sz);sz();
 var K={},aK=false;
 document.addEventListener('keydown',function(e){K[e.key]=true;if(e.key===' ')e.preventDefault()
-if(e.key==='j'||e.key==='J')aK=true
+if(e.key==='j'||e.key==='J'||e.key==='m'||e.key==='M')aK=true
 if((e.key==='g'||e.key==='G')&&!G){if(!sv)sv=gSV();sv.co=1000000000;sSV();alert('\u91D1\u5E01\u5DF2\u5230\u8D26\uFF011000000000')}});
-document.addEventListener('keyup',function(e){K[e.key]=false;if(e.key==='j'||e.key==='J')aK=false});
+document.addEventListener('keyup',function(e){K[e.key]=false;if(e.key==='j'||e.key==='J'||e.key==='m'||e.key==='M')aK=false});
 document.addEventListener('touchstart',function(e){
   if(G&&G.st==='p'){e.preventDefault();aK=true}
 });
