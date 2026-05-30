@@ -343,7 +343,7 @@ function lp(){
     if(G&&G.st==='d'){G.dt--;if(G.dt<=0){if(G.end){showEndOver()}else{$('deadInfo').textContent='3\u6761\u547D\u7528\u5B8C\u4E86';hideAll();$('hud').className='hud';show('sDead')}}}
     if(G&&G.st==='c'){G.ct--;if(G.ct<=0)showWin()}
     r();
-  }catch(e){try{cx.fillStyle='#fff';cx.font='12px Arial';cx.fillText('ERR:'+e.message,10,30)}catch(e2){}}
+  }catch(e){try{cx.fillStyle='#fff';cx.font='16px Arial';cx.fillText('错误:'+e.message,10,30);cx.fillText('行:'+e.lineNumber,10,55);if(!window._errShown){window._errShown=true;setTimeout(function(){alert('游戏错误:'+e.message)},100)}}catch(e2){}}
   requestAnimationFrame(lp)
 }
 // ---- UI ----
