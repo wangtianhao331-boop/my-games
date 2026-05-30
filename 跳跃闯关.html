@@ -147,6 +147,7 @@ function upWpn(){
 }
 function upH(){
   if(!G)return;
+  if(!sv)sv=gSV();
   $('hLv').textContent=G.end?'\u65E0\u5C3D':('\u7B2C'+(G.id+1)+'\u5173');
   $('hCoin').textContent='\u91D1\u5E01:'+(sv.co||0);
   $('hWpn').textContent=WEAPONS[G.wpI||0].name;
