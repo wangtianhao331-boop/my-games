@@ -314,7 +314,7 @@ function r(){
     cx.fillStyle='#fff';cx.font='bold 9px Arial';cx.textAlign='center';cx.fillText(b.nm,b.x+b.w/2,b.y-12)
   }
   // Boss投射物
-  for(var bi=0;bi<G.bpj.length;bi++){
+  if(G.bpj) for(var bi=0;bi<G.bpj.length;bi++){
     var bj=G.bpj[bi];cx.fillStyle='#ff6b6b';cx.shadowColor='#ff6b6b';cx.shadowBlur=6;cx.beginPath();cx.arc(bj.x,bj.y,7,0,Math.PI*2);cx.fill();cx.shadowBlur=0
     cx.fillStyle='#ffd43b';cx.beginPath();cx.arc(bj.x,bj.y,3,0,Math.PI*2);cx.fill()
   }
