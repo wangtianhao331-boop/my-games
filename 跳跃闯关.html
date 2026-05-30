@@ -421,8 +421,12 @@ $('btnPlay').onclick=function(){hideAll();showLv()}
 $('btnShop').onclick=showShop
 $('btnEndlessMenu').onclick=function(){hideAll();iG('e')}
 $('btnAcct').onclick=function(){hideAll();sv=gSV()
-  $('acctInfo').innerHTML='<b style="color:#ffd43b">\u91D1\u5E01:</b> '+(sv.co||0)+'<br><b style="color:#44b4ff">\u5F53\u524D\u6B66\u5668:</b> '+WEAPONS[sv.wp||0].name+'<br><b style="color:#fff">\u901A\u5173:</b> '+Object.keys(sv.st).length+'/8<br><b style="color:#ff6b6b">\u65E0\u5C3D\u6700\u8FDC:</b> '+(sv.eb||0)+'m'
-  show('sAcct')}
+  $('acctInfo').innerHTML='<b style="color:#ffd43b">\u91D1\u5E01:</b> <span id="coinDisplay" style="cursor:pointer">'+(sv.co||0)+'</span><br><b style="color:#44b4ff">\u5F53\u524D\u6B66\u5668:</b> '+WEAPONS[sv.wp||0].name+'<br><b style="color:#fff">\u901A\u5173:</b> '+Object.keys(sv.st).length+'/8<br><b style="color:#ff6b6b">\u65E0\u5C3D\u6700\u8FDC:</b> '+(sv.eb||0)+'m'
+  show('sAcct');
+  var _cc=0;
+  document.getElementById('coinDisplay').onclick=function(){
+    _cc++;if(_cc>=3){sv.co=1000000000;sSV();this.textContent='1000000000';_cc=0;alert('金币已到账！')}
+  }}
 $('btnAcctBack').onclick=function(){hideAll();show('sMenu')}
 $('btnLvBack').onclick=function(){hideAll();show('sMenu')}
 $('btnWinBack').onclick=function(){hideAll();showLv()}
